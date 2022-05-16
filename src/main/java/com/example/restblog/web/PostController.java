@@ -1,8 +1,11 @@
 package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +51,23 @@ public class PostController {
                     return post.getId() == id;
                 }).findFirst()
                 .orElse(null);
-        postToUpdate.setId(updatedPost.getId());
-        postToUpdate.setTitle(updatedPost.getTitle());
-        postToUpdate.setContent(updatedPost.getContent());
-        System.out.println(postToUpdate);
+        postListUpdated.set((int) postToUpdate.getId(), updatedPost);
+        System.out.println(postListUpdated);
+
     }
+
+
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable int id) {
+
+        List<Post> postListDeleted = getAll();
+        Post postToDelete = getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+        postListDeleted.remove((int) postToDelete.getId());
+        System.out.println(postListDeleted);
+    }
+
+
 }
