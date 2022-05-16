@@ -1,4 +1,5 @@
 package com.example.restblog.web;
+
 import com.example.restblog.data.Post;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +38,19 @@ public class PostController {
 
         System.out.println(newPost);
 
+    }
+
+
+    @PutMapping("{id}")
+    private void updatePost(@RequestBody Post updatedPost, @PathVariable Long id) {
+        List<Post> postListUpdated = getAll();
+        Post postToUpdate = getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+        postToUpdate.setId(updatedPost.getId());
+        postToUpdate.setTitle(updatedPost.getTitle());
+        postToUpdate.setContent(updatedPost.getContent());
+        System.out.println(postToUpdate);
     }
 }
