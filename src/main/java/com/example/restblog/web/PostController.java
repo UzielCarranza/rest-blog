@@ -3,6 +3,7 @@ package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,15 @@ public class PostController {
 
         postList.add(new Post(2, "post2", "this is a comment"));
         return postList;
+    }
+
+    @GetMapping("{id}")
+    public Post getById(@PathVariable Long id) {
+        return getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+
     }
 
 }
