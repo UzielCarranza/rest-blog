@@ -15,7 +15,7 @@ import java.util.List;
 public class PostController {
 
 
-    @GetMapping("/api/posts")
+    @GetMapping()
     public List<Post> getAll() {
         List<Post> postList = new ArrayList<>();
         postList.add(new Post(0, "post1", "this is a comment"));
