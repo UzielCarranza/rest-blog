@@ -1,11 +1,6 @@
 package com.example.restblog.web;
-
-
 import com.example.restblog.data.Post;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +31,11 @@ public class PostController {
 
     }
 
+
+    @PostMapping
+    private void createPost(@RequestBody Post newPost) {
+
+        System.out.println(newPost);
+
+    }
 }
