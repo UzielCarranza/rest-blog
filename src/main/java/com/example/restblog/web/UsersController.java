@@ -30,11 +30,20 @@ public class UsersController {
         user2.setId(2);
         user2.setEmail("email@email");
         user2.setCreatedAt(new Date(2022, 12, 21));
-        user2.setRole(User.Role.USER);
+        user2.setRole(User.Role.ADMIN);
         user2.setPassword("eadae");
         users.add(user);
         users.add(user2);
 
         return users;
+    }
+
+    @GetMapping("{id}")
+    public User getById(@PathVariable Long id) {
+        return getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+
     }
 }
