@@ -66,4 +66,19 @@ public class UsersController {
         System.out.println(userListUpdated);
 
     }
+
+
+
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable int id) {
+
+        List<User> UserListDeleted = getAll();
+        User UserToDelete = getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+        System.out.println(UserListDeleted);
+        UserListDeleted.remove((int) UserToDelete.getId());
+        System.out.println(UserListDeleted);
+    }
 }
