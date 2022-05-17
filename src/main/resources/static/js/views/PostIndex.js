@@ -11,9 +11,8 @@ export default function PostIndex(props) {
                 ${props.posts.map(post => ` <div class="container">
             <h3 class="content-title">${post.title}</h3>
             <h3 class="content-post">${post.content}</h3>
-            <span class="span-id" data-id="${post.id}"></span>
-                    <button class="btn edit-post">edit</button>
-                    <button class="btn delete-post">Delete post</button> 
+                    <button class="btn edit-post" data-id="${post.id}">edit</button>
+                    <button class="btn delete-post" data-id="${post.id}" >Delete post</button> 
                     </div>
                 `).join('')}
 
@@ -66,7 +65,8 @@ function postEventListener() {
 
 function editEventListener() {
     $(".edit-post").click(function () {
-        let postIdToBeUpdate = $(this).parent().children('span').attr('data-id');
+        let postIdToBeUpdate = $(this).attr('data-id');
+        console.log(postIdToBeUpdate)
 
         let postTitleToBeUpdate = $(this).parent().children('.content-title').html();
 
@@ -109,7 +109,7 @@ function editEventListener() {
 function deleteEventListener() {
     $(".delete-post").click(function () {
 
-        let postIdToBeDeleted = $(this).parent().children('span').attr('data-id');
+        let postIdToBeDeleted = $(this).attr('data-id');
         const deleteMovie = {
             id: `${postIdToBeDeleted}`
         }
