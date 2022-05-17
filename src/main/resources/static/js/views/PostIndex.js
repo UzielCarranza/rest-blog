@@ -7,8 +7,9 @@ export default function PostIndex(props) {
             <h1>Posts Page</h1>
         </header>
         <main>
-            <div id="posts-container">
-                ${props.posts.map(post => ` <div class="container">
+            <div id="posts-container" class="container">
+                ${props.posts.map(post => `
+             <div class="containe text-center rounded border border-primary m-4">
             <h3 class="content-title">${post.title}</h3>
             <h3 class="content-post">${post.content}</h3>
                     <button class="btn edit-post" data-id="${post.id}">edit</button>
@@ -17,15 +18,18 @@ export default function PostIndex(props) {
                 `).join('')}
 
             </div>
+            <div class="container">
+                <form id="create-newPost" class="text-center form-control">
+                    <label for="post-title">Title:</label>
+                    <input type="text" id="post-title" name="post-title" class="form-control" placeholder="Enter Title">
+                    <label for="post-content">Content:</label>
+                    <textarea type="text" id="post-content" name="post-content" class="form-control"
+                              placeholder="Enter comment"
+                              rows="4" cols="50"></textarea>
+                    <button id="create-post" value="submit" type="submit" ${PostEvent}>button</button>
+                </form>
+            </div>
         </main>
-        <form id="create-newPost" class="text-center">
-            <label for="post-title">Title:</label>
-            <input type="text" id="post-title" name="post-title">
-            <label for="post-content">Content:</label>
-            <input type="text" id="post-content" name="post-content">
-            <button id="create-post" value="submit" type="submit" ${PostEvent}>button</button>
-        </form>
-
     `;
 }
 
@@ -54,16 +58,12 @@ function postEventListener() {
 function editEventListener() {
     $(".edit-post").click(function () {
         let postIdToBeUpdate = $(this).attr('data-id');
-        console.log(postIdToBeUpdate)
-
         let postTitleToBeUpdate = $(this).parent().children('.content-title').html();
-
         let postCommentToBeUpdate = $(this).parent().children('.content-post').html();
         let title = prompt('enter new title');
-
         let comment = prompt('enter new comment');
 
-        if (title) {
+        if (title === prompt('enter new title')) {
             postTitleToBeUpdate = title;
         }
         if (comment) {
