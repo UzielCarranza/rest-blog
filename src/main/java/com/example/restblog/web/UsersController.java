@@ -24,7 +24,7 @@ public class UsersController {
         user.setCreatedAt(new Date(2022, 12, 21));
         user.setRole(User.Role.USER);
         user.setPassword("daeadae");
-
+        user.setUsername("one");
 
         User user2 = new User();
         user2.setId(2);
@@ -32,6 +32,7 @@ public class UsersController {
         user2.setCreatedAt(new Date(2022, 12, 21));
         user2.setRole(User.Role.ADMIN);
         user2.setPassword("eadae");
+        user2.setUsername("dae");
         users.add(user);
         users.add(user2);
 
