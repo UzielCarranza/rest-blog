@@ -44,21 +44,9 @@ function postEventListener() {
             content: `${content}`
 
         };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newPost),
-        };
-        fetch("http://localhost:8080/api/posts", options)
-            .then(res => {
-                console.log(res.status);
-                createView("/posts")
-            }).catch(error => {
-            console.log(error);
-            createView("/posts");
-        });
+        let action = 'POST';
+        let url = `http://localhost:8080/api/posts`
+        fetchAction(action, newPost, url)
     })
 }
 
@@ -86,21 +74,9 @@ function editEventListener() {
             title: `${postTitleToBeUpdate}`,
             content: `${postCommentToBeUpdate}`
         };
-        const options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedPost),
-        };
-        fetch(`http://localhost:8080/api/posts/${postIdToBeUpdate}`, options)
-            .then(res => {
-                console.log(res.status);
-                createView("/posts")
-            }).catch(error => {
-            console.log(error);
-            createView("/posts");
-        });
+        let action = 'PUT';
+        let url = `http://localhost:8080/api/posts/${postIdToBeUpdate}`
+        fetchAction(action, updatedPost, url)
 
     })
 }
@@ -113,20 +89,27 @@ function deleteEventListener() {
         const deleteMovie = {
             id: `${postIdToBeDeleted}`
         }
-        const options = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(deleteMovie),
-        };
-        fetch(`http://localhost:8080/api/posts/${postIdToBeDeleted}`, options)
-            .then(res => {
-                console.log(res.status);
-                createView("/posts")
-            }).catch(error => {
-            console.log(error);
-            createView("/posts");
-        });
+        let action = 'DELETE'
+        let url = `http://localhost:8080/api/posts/${postIdToBeDeleted}`
+        fetchAction(action, deleteMovie, url);
     })
+}
+
+
+const fetchAction = (action, postObject, url) => {
+    const options = {
+        method: action,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postObject),
+    };
+    fetch(`${url}`, options)
+        .then(res => {
+            console.log(res.status);
+            createView("/posts")
+        }).catch(error => {
+        console.log(error);
+        createView("/posts");
+    });
 }
