@@ -13,17 +13,24 @@ export default function Register(props) {
     <h1>Register with us</h1>
 
     <form id="Register-form" class="container">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text"/>
+        <div class="form-group mb-2">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" class="form-control" placeholder="Enter your username"/>
+        </div>
 
-        <input type="email" id="email" name="email">
-        <label for="email">Enter your email:</label>
+        <div class="form-group mb-2">
+            <label for="email">Enter your email:</label>
+            <input pattern=".+@globex\\.com" size="30" type="email" id="email" name="email" class="form-control"
+                   placeholder="Enter your email" required>
+        </div>
 
 
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="on"/>
-
-        <input id="register-btn" type="submit" value="Register"/>
+        <div class="form-group mb-2">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="on" class="form-control"
+                   placeholder="Enter a password"/>
+        </div>
+        <input id="register-btn" type="submit" value="Register" class="btn btn-primary mt-4"/>
     </form>
     </body>
     </html>`;
@@ -35,11 +42,12 @@ export function RegisterEvent() {
         let username = $("#username").val();
         let password = $("#password").val();
         let email = $("#email").val();
-
+        const date = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
         const newUser = {
             username: `${username}`,
             email: `${email}`,
             password: `${password}`,
+            createdAt: `${date}`
 
         };
         let request = {
