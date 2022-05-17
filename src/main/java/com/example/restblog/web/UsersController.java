@@ -40,8 +40,8 @@ public class UsersController {
 
     @GetMapping("{id}")
     public User getById(@PathVariable Long id) {
-        return getAll().stream().filter((post) -> {
-                    return post.getId() == id;
+        return getAll().stream().filter((user) -> {
+                    return user.getId() == id;
                 }).findFirst()
                 .orElse(null);
 
@@ -58,8 +58,8 @@ public class UsersController {
     @PutMapping("{id}")
     private void updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
         List<User> userListUpdated = getAll();
-        User userToUpdate = getAll().stream().filter((post) -> {
-                    return post.getId() == id;
+        User userToUpdate = getAll().stream().filter((user) -> {
+                    return user.getId() == id;
                 }).findFirst()
                 .orElse(null);
         userListUpdated.set((int) userToUpdate.getId(), updatedUser);
@@ -73,11 +73,10 @@ public class UsersController {
     public void deleteById(@PathVariable int id) {
 
         List<User> UserListDeleted = getAll();
-        User UserToDelete = getAll().stream().filter((post) -> {
-                    return post.getId() == id;
+        User UserToDelete = getAll().stream().filter((user) -> {
+                    return user.getId() == id;
                 }).findFirst()
                 .orElse(null);
-        System.out.println(UserListDeleted);
         UserListDeleted.remove((int) UserToDelete.getId());
         System.out.println(UserListDeleted);
     }
