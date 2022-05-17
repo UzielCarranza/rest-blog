@@ -108,6 +108,25 @@ function editEventListener() {
 
 function deleteEventListener() {
     $(".delete-post").click(function () {
-        alert("delete")
+
+        let postIdToBeDeleted = $(this).parent().children('span').attr('data-id');
+        const deleteMovie = {
+            id: `${postIdToBeDeleted}`
+        }
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(deleteMovie),
+        };
+        fetch(`http://localhost:8080/api/posts/${postIdToBeDeleted}`, options)
+            .then(res => {
+                console.log(res.status);
+                createView("/posts")
+            }).catch(error => {
+            console.log(error);
+            createView("/posts");
+        });
     })
 }
