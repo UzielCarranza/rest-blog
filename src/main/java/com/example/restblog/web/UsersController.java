@@ -46,4 +46,11 @@ public class UsersController {
                 .orElse(null);
 
     }
+
+        @PostMapping
+    private void createUser(@RequestBody User newUser) {
+
+        System.out.println(newUser);
+
+    }
 }
