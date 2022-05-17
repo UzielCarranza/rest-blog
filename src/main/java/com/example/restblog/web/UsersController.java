@@ -53,4 +53,17 @@ public class UsersController {
         System.out.println(newUser);
 
     }
+
+
+    @PutMapping("{id}")
+    private void updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
+        List<User> userListUpdated = getAll();
+        User userToUpdate = getAll().stream().filter((post) -> {
+                    return post.getId() == id;
+                }).findFirst()
+                .orElse(null);
+        userListUpdated.set((int) userToUpdate.getId(), updatedUser);
+        System.out.println(userListUpdated);
+
+    }
 }
