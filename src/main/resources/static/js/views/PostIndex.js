@@ -20,6 +20,7 @@ export default function PostIndex(props) {
             </div>
             <div class="container">
                 <form id="create-newPost" class="text-center form-control">
+                    <span class="post-update"></span>
                     <label for="post-title">Title:</label>
                     <input type="text" id="post-title" name="post-title" class="form-control" placeholder="Enter Title">
                     <label for="post-content">Content:</label>
@@ -41,17 +42,34 @@ export function PostEvent() {
 
 function postEventListener() {
     $("#create-post").click(function () {
-        const content = $("#post-title").val();
-        const title = $("#post-content").val();
-        const newPost = {
-            title: `${title}`,
-            content: `${content}`
 
-        };
-        let action = 'POST';
-        let url = `http://localhost:8080/api/posts`
-        fetchAction(action, newPost, url)
-    })
+            let updatingPost = $('.post-update').attr('data-id')
+            console.log(updatingPost)
+            const title = $("#post-title").val();
+            const content = $("#post-content").val();
+            if (updatingPost === undefined) {
+                const newPost = {
+                    title: `${title}`,
+                    content: `${content}`
+                };
+                let action = 'POST';
+                let url = `http://localhost:8080/api/posts`
+                fetchAction(action, newPost, url)
+            } else {
+                const postUpdate = {
+                    id: `${updatingPost}`,
+                    title: `${title}`,
+                    content: `${content}`
+
+                };
+                let action = "PUT";
+                let url = `http://localhost:8080/api/posts/${updatingPost}`
+                fetchAction(action, postUpdate, url)
+            }
+
+
+        }
+    )
 }
 
 
@@ -60,24 +78,9 @@ function editEventListener() {
         let postIdToBeUpdate = $(this).attr('data-id');
         let postTitleToBeUpdate = $(this).parent().children('.content-title').html();
         let postCommentToBeUpdate = $(this).parent().children('.content-post').html();
-        let title = prompt('enter new title');
-        let comment = prompt('enter new comment');
-
-        if (title === prompt('enter new title')) {
-            postTitleToBeUpdate = title;
-        }
-        if (comment) {
-            postCommentToBeUpdate = comment;
-        }
-        const updatedPost = {
-            id: `${postIdToBeUpdate}`,
-            title: `${postTitleToBeUpdate}`,
-            content: `${postCommentToBeUpdate}`
-        };
-        let action = 'PUT';
-        let url = `http://localhost:8080/api/posts/${postIdToBeUpdate}`
-        fetchAction(action, updatedPost, url)
-
+        $("#post-title").val(postTitleToBeUpdate)
+        $("#post-content").html(postCommentToBeUpdate)
+        $('.post-update').attr('data-id', `${postIdToBeUpdate}`).html("editing: " + postTitleToBeUpdate)
     })
 }
 
