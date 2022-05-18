@@ -56,16 +56,18 @@ function userInformation(username) {
         </div>
         <form id="user-info-form" class="container ">
             <div class="form-control">
-                <label for="username-name">Update Your Username</label>
+                <p class="m-4">Your Current Username is: ${username.username}</p>
+                <label for="username-name" class="m-4">Update Your Username</label>
                 <input id="username-name" name="username-name" type="text" class="form-control"/>
             </div>
-
             <div class="form-control">
-                <label for="username-name">Update Your Email</label>
+                <p class="m-4">Your Current Email is: ${username.email}</p>
+                <label for="username-name" class="m-4">Update Your Email</label>
                 <input id="user-email" name="username-email" type="text" class="form-control"/>
             </div>
             <div class="form-control">
-                <label for="username-name">Update Your Password</label>
+                <p class="m-4">Your Current Password is: ${username.password}</p>
+                <label for="username-name" class="m-4">Update Your Password</label>
                 <input id="username--pass" name="username-pass" type="text" class="form-control"/>
             </div>
             <input id="register-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>
