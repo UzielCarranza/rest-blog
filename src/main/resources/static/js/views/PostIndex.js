@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+let page = "/posts"
 
 export default function PostIndex(props) {
     // language=HTML
@@ -62,7 +63,7 @@ function postEventListener() {
                 };
                 let action = 'POST';
                 let url = `http://localhost:8080/api/posts`
-                fetchAction(action, newPost, url)
+                fetchAction(action, newPost, url, page)
             }
             // else do a PUT request
             else {
@@ -74,7 +75,7 @@ function postEventListener() {
                 };
                 let action = "PUT";
                 let url = `http://localhost:8080/api/posts/${updatingPost}`
-                fetchAction(action, postUpdate, url)
+                fetchAction(action, postUpdate, url, page)
             }
         }
     )
@@ -102,13 +103,13 @@ function deleteEventListener() {
         }
         let action = 'DELETE'
         let url = `http://localhost:8080/api/posts/${postIdToBeDeleted}`
-        fetchAction(action, deleteMovie, url);
+        fetchAction(action, deleteMovie, url, page);
     })
 }
 
 
 // Handles all fetch actions: POST, PUT, DELETE, depending in user choice
-export const fetchAction = (action, postObject, url) => {
+export const fetchAction = (action, postObject, url, page) => {
     const options = {
         method: action,
         headers: {
@@ -119,9 +120,9 @@ export const fetchAction = (action, postObject, url) => {
     fetch(`${url}`, options)
         .then(res => {
             console.log(res.status);
-            createView("/posts")
+            createView(`${page}`)
         }).catch(error => {
         console.log(error);
-        createView("/posts");
+        createView(`${page}`);
     });
 }
