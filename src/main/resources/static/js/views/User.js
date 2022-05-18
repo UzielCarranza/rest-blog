@@ -25,7 +25,6 @@ export default function myInformation(props) {
 }
 
 export function searchUsername() {
-    getFormValuesOnClick();
     fetchForUserName();
 }
 
@@ -60,6 +59,7 @@ function userInformation(username) {
 const appendToBody = (data) => {
 
     $("#get-username").append(userInformation(data));
+    getFormValuesOnClick();
 }
 
 const getFormValuesOnClick = () => {
