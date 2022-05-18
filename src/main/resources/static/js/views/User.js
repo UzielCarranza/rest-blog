@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+import {fetchAction} from "./PostIndex.js";
 
 export default function myInformation(props) {
     //language=HTML
@@ -18,6 +19,8 @@ export default function myInformation(props) {
             <button id="search-username" class="btn btn-primary mt-4 mb-4" type="submit">Search</button>
         </div>
     </form>
+    <div id="user-result" class="container">
+    </div>
 
     </body>
     </html>`;
@@ -36,6 +39,7 @@ function userInformation(username) {
             <h1>welcome <span>${username.username}</span></h1>
         </div>
         <form id="user-info-form" class="container ">
+            <span id="current-id" data-id="${username.id}"></span>
             <div class="form-control">
                 <p class="m-4">Your Current Username is: <span id="current-username">${username.username}</span></p>
                 <label for="username-name" class="m-4">Update Your Username</label>
@@ -60,7 +64,7 @@ function userInformation(username) {
 // appends form into the form
 const appendToBody = (data) => {
 
-    $("#get-username").append(userInformation(data));
+    $("#user-result").html(userInformation(data));
     getCurrentUserValuesOnClick();
 }
 
@@ -72,10 +76,32 @@ const getCurrentUserValuesOnClick = () => {
         let currentUsername = $('#current-username').html();
         let currentEmail = $('#current-email').html();
         let currentPass = $('#current-pass').html();
-
+        let userId = $('#current-id').attr('data-id')
+        console.log(userId)
     })
 }
 
+// do fetch "PUT" when update button gets click
+
+// let url = `http://localhost:8080/api/posts/${postIdToBeDeleted}`
+// fetchAction();
+//
+//
+// const options = {
+//     method: action,
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(postObject),
+// };
+// fetch(`${url}`, options)
+//     .then(res => {
+//         console.log(res.status);
+//         createView("/posts")
+//     }).catch(error => {
+//     console.log(error);
+//     createView("/posts");
+// });
 
 //
 
