@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @RestController
@@ -48,7 +49,7 @@ public class UsersController {
 
     }
 
-        @PostMapping
+    @PostMapping
     private void createUser(@RequestBody User newUser) {
 
         System.out.println(newUser);
@@ -69,7 +70,6 @@ public class UsersController {
     }
 
 
-
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
 
@@ -81,4 +81,21 @@ public class UsersController {
         UserListDeleted.remove((int) UserToDelete.getId());
         System.out.println(UserListDeleted);
     }
+
+
+//    needs to return List<User>... for now is just printing the username for testing purposes
+    @GetMapping("/username")
+    public void getByUsername(@RequestParam("username") String username) {
+        List<User> userByUsername = getAll();
+
+        User getByUsername = getAll().stream().filter((user) -> {
+                    return user.getUsername().contains(username);
+                }).findFirst()
+                .orElse(null);
+        System.out.println(getByUsername);
+//        return getByUsername;
+
+    }
+
+
 }
