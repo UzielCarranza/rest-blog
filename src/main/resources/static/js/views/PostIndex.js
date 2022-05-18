@@ -43,11 +43,17 @@ export function PostEvent() {
 function postEventListener() {
     $("#create-post").click(function () {
 
+            // when click, grab the data-id attribute
             let updatingPost = $('.post-update').attr('data-id')
-            console.log(updatingPost)
+
+            //get current title and content values
             const title = $("#post-title").val();
             const content = $("#post-content").val();
+            //
+
+            // check if data-id is undefined
             if (updatingPost === undefined) {
+                //if its undefined, do a POST request
                 const newPost = {
                     title: `${title}`,
                     content: `${content}`
@@ -55,7 +61,9 @@ function postEventListener() {
                 let action = 'POST';
                 let url = `http://localhost:8080/api/posts`
                 fetchAction(action, newPost, url)
-            } else {
+            }
+            // else do a PUT request
+            else {
                 const postUpdate = {
                     id: `${updatingPost}`,
                     title: `${title}`,
@@ -66,13 +74,11 @@ function postEventListener() {
                 let url = `http://localhost:8080/api/posts/${updatingPost}`
                 fetchAction(action, postUpdate, url)
             }
-
-
         }
     )
 }
 
-
+// when click, passed the Post's values to the form for an update
 function editEventListener() {
     $(".edit-post").click(function () {
         let postIdToBeUpdate = $(this).attr('data-id');
@@ -84,7 +90,7 @@ function editEventListener() {
     })
 }
 
-
+// delete request, grabs data-id and then sends it to a DELETE request
 function deleteEventListener() {
     $(".delete-post").click(function () {
 
@@ -99,6 +105,7 @@ function deleteEventListener() {
 }
 
 
+// Handles all fetch actions: POST, PUT, DELETE, depending in user choice
 const fetchAction = (action, postObject, url) => {
     const options = {
         method: action,
