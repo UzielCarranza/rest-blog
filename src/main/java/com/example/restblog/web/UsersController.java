@@ -98,4 +98,18 @@ public class UsersController {
     }
 
 
+    @GetMapping("/email")
+    public void getByEmail(@RequestParam("email") String email) {
+        List<User> userByEmail = getAll();
+
+        User getByEmail = getAll().stream().filter((user) -> {
+                    return user.getEmail().contains(email);
+                }).findFirst()
+                .orElse(null);
+        System.out.println(getByEmail);
+//        return getByUsername;
+
+    }
+
+
 }
