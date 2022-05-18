@@ -42,12 +42,10 @@ export function RegisterEvent() {
         let username = $("#username").val();
         let password = $("#password").val();
         let email = $("#email").val();
-        const date = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
         const newUser = {
             username: `${username}`,
             email: `${email}`,
             password: `${password}`,
-            createdAt: `${date}`
 
         };
         let request = {
