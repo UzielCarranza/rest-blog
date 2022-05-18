@@ -1,6 +1,8 @@
 import createView from "../createView.js";
 import {fetchAction} from "./PostIndex.js";
 
+let page = "/myInformation";
+
 export default function myInformation(props) {
     //language=HTML
     return `<!DOCTYPE html>
@@ -33,6 +35,7 @@ export function searchUsername() {
 
 
 function userInformation(username) {
+    console.log(username, "username")
     // language=HTML
     return `
         <div class="form-control mb-4">
@@ -42,18 +45,18 @@ function userInformation(username) {
             <span id="current-id" data-id="${username.id}"></span>
             <div class="form-control">
                 <p class="m-4">Your Current Username is: <span id="current-username">${username.username}</span></p>
-                <label for="username-name" class="m-4">Update Your Username</label>
-                <input id="username-name" name="username-name" type="text" class="form-control"/>
+                <label for="username-update" class="m-4">Update Your Username</label>
+                <input id="username-update" name="username-update" type="text" class="form-control"/>
             </div>
             <div class="form-control">
                 <p class="m-4">Your Current Email is: <span id="current-email">${username.email}</span></p>
-                <label for="username-name" class="m-4">Update Your Email</label>
-                <input id="user-email" name="username-email" type="text" class="form-control"/>
+                <label for="email-update" class="m-4">Update Your Email</label>
+                <input id="email-update" name="email-update" type="text" class="form-control"/>
             </div>
             <div class="form-control">
                 <p class="m-4">Your Current Password is: <span id="current-pass">${username.password}</span></p>
-                <label for="username-name" class="m-4">Update Your Password</label>
-                <input id="username--pass" name="username-pass" type="text" class="form-control"/>
+                <label for="pass-update" class="m-4">Update Your Password</label>
+                <input id="pass-update" name="pass-update" type="text" class="form-control"/>
             </div>
             <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>
         </form>
@@ -77,41 +80,43 @@ const getCurrentUserValuesOnClick = () => {
         let currentEmail = $('#current-email').html();
         let currentPass = $('#current-pass').html();
         let userId = $('#current-id').attr('data-id')
-        console.log(userId)
+        let updatedUsername = $('#username-update').val();
+        let updatedPass = $('#pass-update').val();
+        let updatedEmail = $('#email-update').val();
+        if (updatedUsername) {
+            currentUsername = updatedUsername;
+        }
+        if (updatedEmail) {
+            currentEmail = updatedEmail;
+        }
+        if (updatedPass) {
+            currentPass = updatedPass;
+        }
+        prepareToSentPutRequest(userId, currentUsername, currentEmail, currentPass)
     })
 }
 
 // do fetch "PUT" when update button gets click
-
-// let url = `http://localhost:8080/api/posts/${postIdToBeDeleted}`
-// fetchAction();
-//
-//
-// const options = {
-//     method: action,
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(postObject),
-// };
-// fetch(`${url}`, options)
-//     .then(res => {
-//         console.log(res.status);
-//         createView("/posts")
-//     }).catch(error => {
-//     console.log(error);
-//     createView("/posts");
-// });
+const prepareToSentPutRequest = (id, username, email, pass) => {
+    const userUpdatedInfo = {
+        id: `${id}`,
+        username: `${username}`,
+        email: `${email}`,
+        password: `${pass}`
+    };
+    let action = 'PUT';
+    let url = `http://localhost:8080/api/users/${id}`
+    fetchAction(action, userUpdatedInfo, url, page)
+}
 
 //
-
 
 
 // Look for user based on username
+// can be  refactor to used fetchAction
 const fetchForUserName = () => {
     $('#search-username').click(function () {
         let usernameToBeFound = $('#username').val();
-        console.log(usernameToBeFound)
         const options = {
             method: 'GET',
         };
