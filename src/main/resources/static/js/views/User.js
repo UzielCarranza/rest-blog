@@ -25,6 +25,50 @@ export default function myInformation(props) {
 }
 
 export function searchUsername() {
+    getFormValuesOnClick();
+    fetchForUserName();
+}
+
+
+function userInformation(username) {
+    // language=HTML
+    return `
+        <div class="form-control mb-4">
+            <h1>welcome <span>${username.username}</span></h1>
+        </div>
+        <form id="user-info-form" class="container ">
+            <div class="form-control">
+                <p class="m-4">Your Current Username is: <span id="current-username">${username.username}</span></p>
+                <label for="username-name" class="m-4">Update Your Username</label>
+                <input id="username-name" name="username-name" type="text" class="form-control"/>
+            </div>
+            <div class="form-control">
+                <p class="m-4">Your Current Email is: <span id="current-email">${username.email}</span></p>
+                <label for="username-name" class="m-4">Update Your Email</label>
+                <input id="user-email" name="username-email" type="text" class="form-control"/>
+            </div>
+            <div class="form-control">
+                <p class="m-4">Your Current Password is: <span id="current-pass">${username.password}</span></p>
+                <label for="username-name" class="m-4">Update Your Password</label>
+                <input id="username--pass" name="username-pass" type="text" class="form-control"/>
+            </div>
+            <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>
+        </form>
+    `
+}
+
+const appendToBody = (data) => {
+
+    $("#get-username").append(userInformation(data));
+}
+
+const getFormValuesOnClick = () => {
+    $('#update-btn').click(function () {
+        console.log("hello")
+    })
+}
+
+const fetchForUserName = () => {
     $('#search-username').click(function () {
         let usernameToBeFound = $('#username').val();
         console.log(usernameToBeFound)
@@ -43,39 +87,4 @@ export function searchUsername() {
                 createView("/myInformation");
             });
     })
-}
-
-
-function userInformation(username) {
-    console.log(username)
-    console.log(username.username)
-    // language=HTML
-    return `
-        <div class="form-control mb-4">
-            <h1>welcome <span>${username.username}</span></h1>
-        </div>
-        <form id="user-info-form" class="container ">
-            <div class="form-control">
-                <p class="m-4">Your Current Username is: ${username.username}</p>
-                <label for="username-name" class="m-4">Update Your Username</label>
-                <input id="username-name" name="username-name" type="text" class="form-control"/>
-            </div>
-            <div class="form-control">
-                <p class="m-4">Your Current Email is: ${username.email}</p>
-                <label for="username-name" class="m-4">Update Your Email</label>
-                <input id="user-email" name="username-email" type="text" class="form-control"/>
-            </div>
-            <div class="form-control">
-                <p class="m-4">Your Current Password is: ${username.password}</p>
-                <label for="username-name" class="m-4">Update Your Password</label>
-                <input id="username--pass" name="username-pass" type="text" class="form-control"/>
-            </div>
-            <input id="register-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>
-        </form>
-    `
-}
-
-const appendToBody = (data) => {
-
-    $("#get-username").append(userInformation(data));
 }
