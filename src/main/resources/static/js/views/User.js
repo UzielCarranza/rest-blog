@@ -56,18 +56,32 @@ function userInformation(username) {
     `
 }
 
+
+// appends form into the form
 const appendToBody = (data) => {
 
     $("#get-username").append(userInformation(data));
-    getFormValuesOnClick();
+    getCurrentUserValuesOnClick();
 }
 
-const getFormValuesOnClick = () => {
+
+// Edit actions
+
+const getCurrentUserValuesOnClick = () => {
     $('#update-btn').click(function () {
-        console.log("hello")
+        let currentUsername = $('#current-username').html();
+        let currentEmail = $('#current-email').html();
+        let currentPass = $('#current-pass').html();
+
     })
 }
 
+
+//
+
+
+
+// Look for user based on username
 const fetchForUserName = () => {
     $('#search-username').click(function () {
         let usernameToBeFound = $('#username').val();
