@@ -1,14 +1,11 @@
 package com.example.restblog.web;
 
-import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 @RestController
@@ -20,7 +17,7 @@ public class UsersController {
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         User user = new User();
-        user.setId(1);
+        user.setId(0);
         user.setEmail("email@email");
         user.setCreatedAt(new Date(2022, 12, 21));
         user.setRole(User.Role.USER);
@@ -28,7 +25,7 @@ public class UsersController {
         user.setUsername("one");
 
         User user2 = new User();
-        user2.setId(2);
+        user2.setId(1);
         user2.setEmail("email@email");
         user2.setCreatedAt(new Date(2022, 12, 21));
         user2.setRole(User.Role.ADMIN);
@@ -83,16 +80,19 @@ public class UsersController {
     }
 
 
-//    needs to return List<User>... for now is just printing the username for testing purposes
-    @GetMapping("/username")
-    public void getByUsername(@RequestParam("username") String username) {
+    //    needs to return List<User>... for now is just printing the username for testing purposes
+    @GetMapping("/username/{username}")
+    public User getByUsername(@PathVariable("username") String username) {
         List<User> userByUsername = getAll();
 
         User getByUsername = getAll().stream().filter((user) -> {
                     return user.getUsername().contains(username);
                 }).findFirst()
                 .orElse(null);
-        System.out.println(getByUsername);
+        int userId = (int) getByUsername.getId();
+        System.out.println(userId);
+        System.out.println(userByUsername);
+        return userByUsername.get(userId);
 //        return getByUsername;
 
     }
