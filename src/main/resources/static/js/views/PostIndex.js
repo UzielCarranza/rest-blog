@@ -20,7 +20,7 @@ export default function PostIndex(props) {
             </div>
             <div class="container">
                 <form id="create-newPost" class="text-center form-control">
-                    <span class="post-update"></span>
+                    <span class="post-update form-control"></span>
                     <label for="post-title">Title:</label>
                     <input type="text" id="post-title" name="post-title" class="form-control" placeholder="Enter Title">
                     <label for="post-content">Content:</label>
@@ -88,7 +88,7 @@ function editEventListener() {
         let postCommentToBeUpdate = $(this).parent().children('.content-post').html();
         $("#post-title").val(postTitleToBeUpdate)
         $("#post-content").html(postCommentToBeUpdate)
-        $('.post-update').attr('data-id', `${postIdToBeUpdate}`).html("editing: " + postTitleToBeUpdate)
+        $('.post-update').attr('data-id', `${postIdToBeUpdate}`).html("Editing: " + postTitleToBeUpdate)
     })
 }
 
