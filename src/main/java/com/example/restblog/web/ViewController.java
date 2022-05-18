@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ViewController {
 
 
-    @RequestMapping({"/", "/about", "/posts", "/login", "/home", "/register"})
+    @RequestMapping({"/", "/about", "/posts", "/login", "/home", "/register", "/myInformation"})
     public String showView() {
         return "forward:/index.html";
     }
