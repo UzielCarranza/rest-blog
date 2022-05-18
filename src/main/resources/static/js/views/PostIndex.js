@@ -12,8 +12,8 @@ export default function PostIndex(props) {
              <div class="containe text-center rounded border border-primary m-4">
             <h3 class="content-title">${post.title}</h3>
             <h3 class="content-post">${post.content}</h3>
-                    <button class="btn edit-post" data-id="${post.id}">edit</button>
-                    <button class="btn delete-post" data-id="${post.id}" >Delete post</button> 
+                    <button class="btn edit-post  btn-primary mt-4 mb-1" data-id="${post.id}"> <i class="fa-solid fa-pencil"></i>  Edit Post</button>
+                    <button class="btn delete-post  btn-primary mt-4 mb-1" data-id="${post.id}" >Delete Post  <i class="fa-solid fa-trash-can"></i></button> 
                     </div>
                 `).join('')}
 
@@ -27,7 +27,9 @@ export default function PostIndex(props) {
                     <textarea type="text" id="post-content" name="post-content" class="form-control"
                               placeholder="Enter comment"
                               rows="4" cols="50"></textarea>
-                    <button id="create-post" value="submit" type="submit" ${PostEvent}>button</button>
+                    <button class="btn btn-primary mt-4 mb-1" id="create-post" value="submit" type="submit"
+                            ${PostEvent}>button
+                    </button>
                 </form>
             </div>
         </main>
