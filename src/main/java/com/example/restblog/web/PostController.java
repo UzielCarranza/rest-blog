@@ -18,11 +18,11 @@ public class PostController {
     @GetMapping()
     public List<Post> getAll() {
         List<Post> postList = new ArrayList<>();
-        postList.add(new Post(0, "post1", "this is a comment"));
+        postList.add(new Post(0, "Elon Musk Tweet", "He just invested into this coin...."));
 
-        postList.add(new Post(1, "post2", "this is a comment"));
+        postList.add(new Post(1, "War in....", "Crazy how this war is going..."));
 
-        postList.add(new Post(2, "post2", "this is a comment"));
+        postList.add(new Post(2, "Elections", "Who's gonna win?"));
         return postList;
     }
 
