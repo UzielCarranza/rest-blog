@@ -108,7 +108,7 @@ function deleteEventListener() {
 
 
 // Handles all fetch actions: POST, PUT, DELETE, depending in user choice
-const fetchAction = (action, postObject, url) => {
+export const fetchAction = (action, postObject, url) => {
     const options = {
         method: action,
         headers: {
