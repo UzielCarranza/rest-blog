@@ -1,6 +1,6 @@
 package com.example.restblog.data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class User {
 
@@ -8,18 +8,17 @@ public class User {
     private String username;
     private String email;
     private String password;
-    Date createdAt;
-    Role role;
+    LocalDateTime createdAt = LocalDateTime.now();
+    Role role = Role.USER;
 
 
     public enum Role {USER, ADMIN}
 
-    public User(long id, String email, String password, Date createdAt, Role role) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.createdAt = createdAt;
-        this.role = role;
     }
 
     public User() {
@@ -49,11 +48,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
