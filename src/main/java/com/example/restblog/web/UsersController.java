@@ -2,8 +2,6 @@ package com.example.restblog.web;
 
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +17,12 @@ public class UsersController {
         User user = new User();
         user.setId(0);
         user.setEmail("email@email");
-        user.setCreatedAt(new Date(2022, 12, 21));
-        user.setRole(User.Role.USER);
         user.setPassword("daeadae");
         user.setUsername("one");
 
         User user2 = new User();
         user2.setId(1);
         user2.setEmail("email@email");
-        user2.setCreatedAt(new Date(2022, 12, 21));
-        user2.setRole(User.Role.ADMIN);
         user2.setPassword("eadae");
         user2.setUsername("dae");
         users.add(user);
