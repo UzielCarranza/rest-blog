@@ -6,6 +6,7 @@ import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class CategoriesController {
 
 
     @GetMapping
-    private Category getPostByCategory() {
+    private Category getPostByCategory(@RequestParam String categoryName) {
         List<Post> postListEample = new ArrayList<>();
         List<User> users = new ArrayList<>();
         List<Category> category = new ArrayList<>();
@@ -28,6 +29,16 @@ public class CategoriesController {
         users.add(user1);
         postListEample.add(post1);
 
-        return category.get(0);
+        Post userToShow = postListEample.stream().filter((category1) -> {
+                    return category1.getCategories().equals(categoryName);
+                }).findFirst()
+                .orElse(null);
+        if (userToShow.getCategories().equals(categoryName)) {
+            System.out.println(userToShow);
+            System.out.println("found it");
+        } else {
+            System.out.println("not found");
+        }
+        return null;
     }
 }
