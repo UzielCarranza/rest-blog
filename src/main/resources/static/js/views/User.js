@@ -73,15 +73,18 @@ function userInformation(username) {
 
 // appends form into the form
 const appendToBody = (data) => {
+    if (data.username === undefined) {
+        alert("No username found!")
+    } else {
+        $("#user-result").html(userInformation(data));
+        // might not need this code... waiting to see how the project is going to developed
+        // getCurrentUserValuesOnClick();
 
-    $("#user-result").html(userInformation(data));
-    // might not need this code... waiting to see how the project is going to developed
-    // getCurrentUserValuesOnClick();
-
-    // event listener for buttons
-    updateUsername();
-    updateEmail();
-    updatePass(data);
+        // event listener for buttons
+        updateUsername();
+        updateEmail();
+        updatePass(data);
+    }
 }
 
 
