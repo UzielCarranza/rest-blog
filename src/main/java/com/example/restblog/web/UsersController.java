@@ -116,9 +116,7 @@ public class UsersController {
                     return user.getId() == id;
                 }).findFirst()
                 .orElse(null);
-        System.out.println(updatePassword);
-        System.out.println(oldPassword);
-        if (updatePassword.getPassword().equals(oldPassword)) {
+        if (updatePassword.getPassword().equals(oldPassword) && (newPassword.length() > 3)) {
             updatePassword.setPassword(newPassword);
             System.out.println(updatePassword);
             System.out.println("password updated");
