@@ -1,11 +1,9 @@
 package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
-import org.springframework.http.HttpStatus;
+import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +16,15 @@ public class PostController {
     @GetMapping()
     public List<Post> getAll() {
         List<Post> postList = new ArrayList<>();
-        postList.add(new Post(0, "Elon Musk Tweet", "He just invested into this coin...."));
+        List<User> users = new ArrayList<>();
+        User user1 = new User(3L, "tet1", "@email1", "1234", postList);
+        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1);
+        users.add(user1);
+        postList.add(post1);
 
-        postList.add(new Post(1, "War in....", "Crazy how this war is going..."));
-
-        postList.add(new Post(2, "Elections", "Who's gonna win?"));
+//        postList.add(new Post(1, "War in....", "Crazy how this war is going..."));
+//
+//        postList.add(new Post(2, "Elections", "Who's gonna win?"));
         return postList;
     }
 

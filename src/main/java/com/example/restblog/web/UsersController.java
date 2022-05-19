@@ -89,7 +89,6 @@ public class UsersController {
         int userId = (int) getByUsername.getId();
         return userByUsername.get(userId);
 //        return getByUsername;
-
     }
 
 

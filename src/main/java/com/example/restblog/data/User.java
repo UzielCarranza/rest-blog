@@ -1,6 +1,9 @@
 package com.example.restblog.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 public class User {
 
@@ -10,16 +13,19 @@ public class User {
     private String password;
     LocalDateTime createdAt = LocalDateTime.now();
     Role role = Role.USER;
+    private Collection<Post> posts;
 
 
     public enum Role {USER, ADMIN}
 
-    public User(Long id, String username, String email, String password) {
+    public User(Long id, String username, String email, String password, Collection<Post> posts) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.posts = posts;
     }
+
 
     public User() {
     }
@@ -72,6 +78,18 @@ public class User {
         this.username = username;
     }
 
+//    Collections
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
+
+
+//
 
     @Override
     public String toString() {
