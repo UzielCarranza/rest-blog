@@ -108,7 +108,7 @@ const updatePass = (data) => {
     $('#update-pass').click(function () {
         let updatedPass = $('#pass-update').val();
         let enterCurrentPassword = $('#enter-currentPassword').val();
-        if (oldPassword === enterCurrentPassword) {
+        if (oldPassword === enterCurrentPassword && (updatedPass.length > 3)) {
             const userUpdatedInfo = {
                 password: `${updatedPass}`
             };
@@ -117,7 +117,7 @@ const updatePass = (data) => {
                 `http://localhost:8080/api/users/${userId}/updatePassword?oldPassword=${enterCurrentPassword}&newPassword=${updatedPass}`,
                 page)
         } else {
-            alert('Current Password did not match our records')
+            alert('Current Password did not match our records or new password is less than 3 letters')
         }
     })
 }
