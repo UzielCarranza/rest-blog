@@ -57,12 +57,15 @@ function userInformation(username) {
             </div>
             <div class="form-control">
                 <p class="m-4">Your Current Password is: <span id="current-pass">${username.password}</span></p>
-                <label for="pass-update" class="m-4">Update Your Password</label>
+                <label>Enter Current Password</label>
+                <input id="enter-currentPassword" type="text" class="form-control mb-4"/>
+                <label class="mt-2">Enter New Password</label>
                 <input id="pass-update" name="pass-update" type="text" class="form-control"/>
+
                 <input id="update-pass" type="submit" value="Update Password" class="btn btn-primary mt-4"/>
             </div>
-<!--            might not need this code right now, waiting on how the projects develops-->
-<!--            <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>-->
+            <!--            might not need this code right now, waiting on how the projects develops-->
+            <!--            <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>-->
         </form>
     `
 }
@@ -78,7 +81,7 @@ const appendToBody = (data) => {
     // event listener for buttons
     updateUsername();
     updateEmail();
-    updatePass();
+    updatePass(data);
 }
 
 
@@ -86,7 +89,6 @@ const updateUsername = () => {
     $('#update-username').click(function () {
         let userId = $('#current-id').attr('data-id');
         let updatedUsername = $('#username-update').val();
-
         console.log("Updating username coming soon")
     })
 }
@@ -100,17 +102,22 @@ const updateEmail = () => {
     })
 }
 
-const updatePass = () => {
+const updatePass = (oldPass) => {
+    let oldPassword = oldPass.password
     $('#update-pass').click(function () {
-        let userId = $('#current-id').attr('data-id');
         let updatedPass = $('#pass-update').val();
-        const userUpdatedInfo = {
-            password: `${updatedPass}`
-        };
-
-        fetchAction("PATCH", userUpdatedInfo,
-            `http://localhost:8080/api/users/${userId}/updatePassword?newPassword=${updatedPass}`,
-            page)
+        let enterCurrentPassword = $('#enter-currentPassword').val();
+        if (oldPassword === enterCurrentPassword) {
+            const userUpdatedInfo = {
+                password: `${updatedPass}`
+            };
+            alert('Password Match and Updated')
+            fetchAction("PATCH", userUpdatedInfo,
+                `http://localhost:8080/api/users/${userId}/updatePassword?newPassword=${updatedPass}`,
+                page)
+        } else {
+            alert('Current Password did not match our records')
+        }
     })
 }
 
