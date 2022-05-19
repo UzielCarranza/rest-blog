@@ -7,6 +7,8 @@ public class Category {
     private Long id;
     private String name;
 
+
+    // many to many relationship with Posts
     private Collection<Post> posts;
 
     public Category(Long id, String name, Collection<Post> posts) {
@@ -32,5 +34,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
     }
 }

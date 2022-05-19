@@ -1,10 +1,12 @@
 package com.example.restblog.web;
 
+import com.example.restblog.data.Category;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -17,8 +19,11 @@ public class PostController {
     public List<Post> getAll() {
         List<Post> postList = new ArrayList<>();
         List<User> users = new ArrayList<>();
+        List<Category> category = new ArrayList<>();
+        category.add(new Category(1L, "horros", postList));
         User user1 = new User(3L, "tet1", "@email1", "1234", postList);
-        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1);
+        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1,
+                category);
         users.add(user1);
         postList.add(post1);
 
