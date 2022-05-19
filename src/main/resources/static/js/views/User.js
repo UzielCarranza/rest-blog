@@ -102,8 +102,9 @@ const updateEmail = () => {
     })
 }
 
-const updatePass = (oldPass) => {
-    let oldPassword = oldPass.password
+const updatePass = (data) => {
+    let oldPassword = data.password;
+    let userId = data.id;
     $('#update-pass').click(function () {
         let updatedPass = $('#pass-update').val();
         let enterCurrentPassword = $('#enter-currentPassword').val();
@@ -113,7 +114,7 @@ const updatePass = (oldPass) => {
             };
             alert('Password Match and Updated')
             fetchAction("PATCH", userUpdatedInfo,
-                `http://localhost:8080/api/users/${userId}/updatePassword?newPassword=${updatedPass}`,
+                `http://localhost:8080/api/users/${userId}/updatePassword?oldPassword=${enterCurrentPassword}&newPassword=${updatedPass}`,
                 page)
         } else {
             alert('Current Password did not match our records')
