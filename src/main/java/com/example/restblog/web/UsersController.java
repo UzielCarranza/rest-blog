@@ -2,6 +2,9 @@ package com.example.restblog.web;
 
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,8 +87,6 @@ public class UsersController {
                 }).findFirst()
                 .orElse(null);
         int userId = (int) getByUsername.getId();
-        System.out.println(userId);
-        System.out.println(userByUsername);
         return userByUsername.get(userId);
 //        return getByUsername;
 
@@ -103,6 +104,26 @@ public class UsersController {
         System.out.println(getByEmail);
 //        return getByUsername;
 
+    }
+
+    @PatchMapping("{id}/updatePassword")
+    private void updatePassword(
+            @PathVariable Long id, @RequestParam(required = false) String oldPassword,
+            @Valid @Size(min = 3) @RequestParam String newPassword
+    ) {
+        List<User> userUpdate = getAll();
+        User updatePassword = getAll().stream().filter((user) -> {
+                    return user.getId() == id;
+                }).findFirst()
+                .orElse(null);
+
+        if (updatePassword.getPassword().equals(oldPassword)) {
+            updatePassword.setPassword(newPassword);
+            System.out.println(updatePassword);
+            System.out.println("password updated");
+        } else {
+            System.out.println("not the same");
+        }
     }
 
 

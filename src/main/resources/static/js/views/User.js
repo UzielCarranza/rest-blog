@@ -47,18 +47,22 @@ function userInformation(username) {
                 <p class="m-4">Your Current Username is: <span id="current-username">${username.username}</span></p>
                 <label for="username-update" class="m-4">Update Your Username</label>
                 <input id="username-update" name="username-update" type="text" class="form-control"/>
+                <input id="update-username" type="submit" value="Update Username" class="btn btn-primary mt-4"/>
             </div>
             <div class="form-control">
                 <p class="m-4">Your Current Email is: <span id="current-email">${username.email}</span></p>
                 <label for="email-update" class="m-4">Update Your Email</label>
                 <input id="email-update" name="email-update" type="text" class="form-control"/>
+                <input id="update-email" type="submit" value="Update Email" class="btn btn-primary mt-4"/>
             </div>
             <div class="form-control">
                 <p class="m-4">Your Current Password is: <span id="current-pass">${username.password}</span></p>
                 <label for="pass-update" class="m-4">Update Your Password</label>
                 <input id="pass-update" name="pass-update" type="text" class="form-control"/>
+                <input id="update-pass" type="submit" value="Update Password" class="btn btn-primary mt-4"/>
             </div>
-            <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>
+<!--            might not need this code right now, waiting on how the projects develops-->
+<!--            <input id="update-btn" type="submit" value="Update" class="btn btn-primary mt-4"/>-->
         </form>
     `
 }
@@ -68,48 +72,88 @@ function userInformation(username) {
 const appendToBody = (data) => {
 
     $("#user-result").html(userInformation(data));
-    getCurrentUserValuesOnClick();
+    // might not need this code... waiting to see how the project is going to developed
+    // getCurrentUserValuesOnClick();
+
+    // event listener for buttons
+    updateUsername();
+    updateEmail();
+    updatePass();
 }
 
 
-// Edit actions
-
-const getCurrentUserValuesOnClick = () => {
-    $('#update-btn').click(function () {
-        let currentUsername = $('#current-username').html();
-        let currentEmail = $('#current-email').html();
-        let currentPass = $('#current-pass').html();
-        let userId = $('#current-id').attr('data-id')
+const updateUsername = () => {
+    $('#update-username').click(function () {
+        let userId = $('#current-id').attr('data-id');
         let updatedUsername = $('#username-update').val();
-        let updatedPass = $('#pass-update').val();
-        let updatedEmail = $('#email-update').val();
-        if (updatedUsername) {
-            currentUsername = updatedUsername;
-        }
-        if (updatedEmail) {
-            currentEmail = updatedEmail;
-        }
-        if (updatedPass) {
-            currentPass = updatedPass;
-        }
-        prepareToSentPutRequest(userId, currentUsername, currentEmail, currentPass)
+
+        console.log("Updating username coming soon")
     })
 }
 
-// do fetch "PUT" when update button gets click
-const prepareToSentPutRequest = (id, username, email, pass) => {
-    const userUpdatedInfo = {
-        id: `${id}`,
-        username: `${username}`,
-        email: `${email}`,
-        password: `${pass}`
-    };
-    let action = 'PUT';
-    let url = `http://localhost:8080/api/users/${id}`
-    fetchAction(action, userUpdatedInfo, url, page)
+
+const updateEmail = () => {
+    $('#update-email').click(function () {
+        let userId = $('#current-id').attr('data-id');
+        let updatedEmail = $('#email-update').val();
+        console.log("Updating email coming soon")
+    })
 }
 
+const updatePass = () => {
+    $('#update-pass').click(function () {
+        let userId = $('#current-id').attr('data-id');
+        let updatedPass = $('#pass-update').val();
+        const userUpdatedInfo = {
+            password: `${updatedPass}`
+        };
+
+        fetchAction("PATCH", userUpdatedInfo,
+            `http://localhost:8080/api/users/${userId}/updatePassword?newPassword=${updatedPass}`,
+            page)
+    })
+}
+
+//////////////////         might not need this code.... waiting to see how the project is going to developed
+// Edit actions
 //
+// const getCurrentUserValuesOnClick = () => {
+//     $('#update-btn').click(function () {
+//         let currentUsername = $('#current-username').html();
+//         let currentEmail = $('#current-email').html();
+//         let currentPass = $('#current-pass').html();
+//         let userId = $('#current-id').attr('data-id')
+//         let updatedUsername = $('#username-update').val();
+//         let updatedPass = $('#pass-update').val();
+//         let updatedEmail = $('#email-update').val();
+//         // do put request
+//         if (updatedUsername) {
+//             currentUsername = updatedUsername;
+//             if (updatedEmail) {
+//                 currentEmail = updatedEmail;
+//             }
+//             if (updatedPass) {
+//                 currentPass = updatedPass;
+//             }
+//             prepareToSentPutRequest(userId, currentUsername, currentEmail, currentPass)
+//         }
+//     })
+// }
+//
+// // do fetch "PUT" when update button gets click
+// const prepareToSentPutRequest = (id, username, email, pass) => {
+//     const userUpdatedInfo = {
+//         id: `${id}`,
+//         username: `${username}`,
+//         email: `${email}`,
+//         password: `${pass}`
+//     };
+//     let action = 'PUT';
+//     let url = `http://localhost:8080/api/users/${id}`
+//     fetchAction(action, userUpdatedInfo, url, page)
+// }
+
+/////////////////////////////////////////////////////////////
 
 
 // Look for user based on username
