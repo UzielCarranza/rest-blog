@@ -1,13 +1,18 @@
 package com.example.restblog.data;
 
+import java.util.Collection;
+
 public class Category {
 
     private Long id;
     private String name;
 
-    public Category(Long id, String name) {
+    private Collection<Post> posts;
+
+    public Category(Long id, String name, Collection<Post> posts) {
         this.id = id;
         this.name = name;
+        this.posts = posts;
     }
 
     public Category() {
