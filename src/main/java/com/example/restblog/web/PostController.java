@@ -1,12 +1,10 @@
 package com.example.restblog.web;
 
-import com.example.restblog.data.Category;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -19,14 +17,23 @@ public class PostController {
     public List<Post> getAll() {
         List<Post> postList = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        List<Category> category = new ArrayList<>();
-        category.add(new Category(1L, "horros", postList));
-        User user1 = new User(3L, "tet1", "@email1", "1234", postList);
-        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1,
-                category);
-        users.add(user1);
+//        List<Category> category = new ArrayList<>();
+//        category.add(new Category(1L, "horros", postList));
+        User user1 = new User(3L, "GranReux", "@email1", "1234", postList);
+        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1);
         postList.add(post1);
 
+        User use3r2 = new User(1L, "TheDeux", "some@ameil", "21211", postList);
+        Post post2 = new Post(1, "War in....", "Crazy how this war is going...", use3r2);
+
+        User user3 = new User(2L, "TheLiberal21","sasa@adadea", "ads",postList);
+        Post post3 = new Post(2, "Elections", "Who's gonna win?", user3);
+
+        postList.add(post2);
+        postList.add(post3);
+        users.add(user1);
+        users.add(use3r2);
+        users.add(user3);
 //        postList.add(new Post(1, "War in....", "Crazy how this war is going..."));
 //
 //        postList.add(new Post(2, "Elections", "Who's gonna win?"));
@@ -75,6 +82,5 @@ public class PostController {
         postListDeleted.remove((int) postToDelete.getId());
         System.out.println(postListDeleted);
     }
-
 
 }
