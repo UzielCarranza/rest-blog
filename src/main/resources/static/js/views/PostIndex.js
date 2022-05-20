@@ -1,8 +1,6 @@
 import createView from "../createView.js";
-let page = "/posts"
 
 export default function PostIndex(props) {
-    console.log(props)
     // language=HTML
     return `
         <header>
@@ -23,7 +21,7 @@ export default function PostIndex(props) {
             </div>
             <div class="container">
                 <form id="create-newPost" class="text-center form-control">
-                    <span class="post-update form-control"></span>
+                    <span class="post-update"></span>
                     <label for="post-title">Title:</label>
                     <input type="text" id="post-title" name="post-title" class="form-control" placeholder="Enter Title">
                     <label for="post-content">Content:</label>
@@ -59,25 +57,16 @@ function postEventListener() {
             // check if data-id is undefined
             if (updatingPost === undefined) {
                 //if its undefined, do a POST request
-                const newPost = {
-                    title: `${title}`,
-                    content: `${content}`
-                };
-                let action = 'POST';
-                let url = `http://localhost:8080/api/posts`
-                fetchAction(action, newPost, url, page)
+                fetchAction("POST", {title: `${title}`, content: `${content}`}, `http://localhost:8080/api/posts`, "/posts")
             }
             // else do a PUT request
             else {
-                const postUpdate = {
+                fetchAction("PUT", {
                     id: `${updatingPost}`,
                     title: `${title}`,
                     content: `${content}`
 
-                };
-                let action = "PUT";
-                let url = `http://localhost:8080/api/posts/${updatingPost}`
-                fetchAction(action, postUpdate, url, page)
+                }, `http://localhost:8080/api/posts/${updatingPost}`, "/posts")
             }
         }
     )
@@ -91,21 +80,18 @@ function editEventListener() {
         let postCommentToBeUpdate = $(this).parent().children('.content-post').html();
         $("#post-title").val(postTitleToBeUpdate)
         $("#post-content").html(postCommentToBeUpdate)
-        $('.post-update').attr('data-id', `${postIdToBeUpdate}`).html("Editing: " + postTitleToBeUpdate)
+        $('.post-update').attr('data-id', `${postIdToBeUpdate}`).html("Editing: " + postTitleToBeUpdate).addClass('form-control');
     })
 }
 
 // delete request, grabs data-id and then sends it to a DELETE request
 function deleteEventListener() {
     $(".delete-post").click(function () {
-
         let postIdToBeDeleted = $(this).attr('data-id');
-        const deleteMovie = {
+
+        fetchAction("DELETE", {
             id: `${postIdToBeDeleted}`
-        }
-        let action = 'DELETE'
-        let url = `http://localhost:8080/api/posts/${postIdToBeDeleted}`
-        fetchAction(action, deleteMovie, url, page);
+        }, `http://localhost:8080/api/posts/${postIdToBeDeleted}`, "/posts");
     })
 }
 
@@ -119,6 +105,7 @@ export const fetchAction = (action, postObject, url, page) => {
         },
         body: JSON.stringify(postObject),
     };
+    console.log(postObject)
     fetch(`${url}`, options)
         .then(res => {
             console.log(res.status);

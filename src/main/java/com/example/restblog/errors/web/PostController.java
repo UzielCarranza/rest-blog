@@ -1,4 +1,4 @@
-package com.example.restblog.web;
+package com.example.restblog.errors.web;
 
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
@@ -19,7 +19,7 @@ public class PostController {
         List<User> users = new ArrayList<>();
 //        List<Category> category = new ArrayList<>();
 //        category.add(new Category(1L, "horros", postList));
-        User user1 = new User(3L, "GranReux", "@email1", "1234", postList);
+        User user1 = new User(2L, "GranReux", "@email1", "1234", postList);
         Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1);
         postList.add(post1);
 
@@ -60,6 +60,8 @@ public class PostController {
 
     @PutMapping("{id}")
     private void updatePost(@RequestBody Post updatedPost, @PathVariable Long id) {
+        System.out.println(updatedPost);
+        System.out.println(id);
         List<Post> postListUpdated = getAll();
         Post postToUpdate = getAll().stream().filter((post) -> {
                     return post.getId() == id;
