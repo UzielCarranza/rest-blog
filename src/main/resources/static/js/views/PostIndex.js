@@ -2,6 +2,7 @@ import createView from "../createView.js";
 let page = "/posts"
 
 export default function PostIndex(props) {
+    console.log(props)
     // language=HTML
     return `
         <header>
@@ -13,6 +14,7 @@ export default function PostIndex(props) {
              <div class="containe text-center rounded border border-primary m-4">
             <h3 class="content-title">${post.title}</h3>
             <h3 class="content-post">${post.content}</h3>
+            <p>Wrote by: ${post.user.username}</p>
                     <button class="btn edit-post  btn-primary mt-4 mb-1" data-id="${post.id}"> <i class="fa-solid fa-pencil"></i>  Edit Post</button>
                     <button class="btn delete-post  btn-primary mt-4 mb-1" data-id="${post.id}" >Delete Post  <i class="fa-solid fa-trash-can"></i></button> 
                     </div>
