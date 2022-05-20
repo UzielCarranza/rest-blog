@@ -1,25 +1,29 @@
 package com.example.restblog.data;
 
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 public class Post {
     private long id;
     private String title;
     private String content;
 
+
+    @JsonIgnoreProperties("posts")
     private User user;
 
 
 // many to many relationship with Categories
-    private Collection<Category> categories;
+//    @JsonIgnoreProperties("categories")
+//    private List<Category> categories;
 
-    public Post(long id, String title, String content, User user, Collection<Category> categories) {
+    public Post(long id, String title, String content, User user) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.user = user;
-        this.categories = categories;
+//        this.categories = categories;
     }
 
     public Post() {
@@ -63,13 +67,13 @@ public class Post {
     //
 
 
-    public Collection<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Collection<Category> categories) {
-        this.categories = categories;
-    }
+//    public List<Category> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(List<Category> categories) {
+//        this.categories = categories;
+//    }
 
 
     @Override
@@ -79,7 +83,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", user=" + user +
-                ", categories=" + categories +
+//                ", categories=" + categories +
                 '}';
     }
 }
