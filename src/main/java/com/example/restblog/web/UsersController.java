@@ -1,5 +1,4 @@
 package com.example.restblog.web;
-
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -123,6 +122,4 @@ public class UsersController {
             System.out.println("not the same");
         }
     }
-
-
 }
