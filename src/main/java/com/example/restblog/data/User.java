@@ -3,7 +3,7 @@ package com.example.restblog.data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 
 public class User {
 
@@ -13,12 +13,14 @@ public class User {
     private String password;
     LocalDateTime createdAt = LocalDateTime.now();
     Role role = Role.USER;
-    private Collection<Post> posts;
+
+    @JsonIgnoreProperties("user")
+    private List<Post> posts;
 
 
     public enum Role {USER, ADMIN}
 
-    public User(Long id, String username, String email, String password, Collection<Post> posts) {
+    public User(Long id, String username, String email, String password, List<Post> posts) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -78,13 +80,13 @@ public class User {
         this.username = username;
     }
 
-//    Collections
+//    Posts
 
-    public Collection<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Collection<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 
