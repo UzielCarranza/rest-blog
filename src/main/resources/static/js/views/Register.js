@@ -1,4 +1,5 @@
 import createView from "../createView.js";
+import {fetchAction} from "./PostIndex.js";
 
 export default function Register(props) {
 
@@ -39,26 +40,11 @@ export default function Register(props) {
 
 export function RegisterEvent() {
     $('#register-btn').click(function () {
-        let username = $("#username").val();
-        let password = $("#password").val();
-        let email = $("#email").val();
-        const newUser = {
-            username: `${username}`,
-            email: `${email}`,
-            password: `${password}`,
+        fetchAction("POST",{
+            username: $("#username").val(),
+            email: $("#email").val(),
+            password: $("#password").val(),
 
-        };
-        let request = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(newUser),
-        };
-
-        fetch("http://localhost:8080/api/users", request)
-            .then((response) => {
-                console.log(response.status)
-                createView("/");
-            });
-    })
-
+        },"http://localhost:8080/api/users", "/" )
+    });
 }
