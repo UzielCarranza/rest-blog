@@ -1,4 +1,4 @@
-package com.example.restblog.errors.web;
+package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
@@ -19,8 +19,8 @@ public class PostController {
         List<User> users = new ArrayList<>();
 //        List<Category> category = new ArrayList<>();
 //        category.add(new Category(1L, "horros", postList));
-        User user1 = new User(2L, "GranReux", "@email1", "1234", postList);
-        Post post1 = new Post(3, "Elon Musk Tweet", "He just invested into this coin....", user1);
+        User user1 = new User(0L, "GranReux", "@email1", "1234", postList);
+        Post post1 = new Post(0, "Elon Musk Tweet", "He just invested into this coin....", user1);
         postList.add(post1);
 
         User use3r2 = new User(1L, "TheDeux", "some@ameil", "21211", postList);

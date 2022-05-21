@@ -1,4 +1,4 @@
-package com.example.restblog.errors.web;
+package com.example.restblog.web;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
