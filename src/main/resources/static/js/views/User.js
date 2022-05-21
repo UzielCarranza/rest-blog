@@ -1,8 +1,6 @@
 import createView from "../createView.js";
 import {fetchAction} from "./PostIndex.js";
 
-let page = "/myInformation";
-
 export default function myInformation(props) {
     //language=HTML
     return `<!DOCTYPE html>
@@ -77,9 +75,6 @@ const appendToBody = (data) => {
         alert("No username found!")
     } else {
         $("#user-result").html(userInformation(data));
-        // might not need this code... waiting to see how the project is going to developed
-        // getCurrentUserValuesOnClick();
-
         // event listener for buttons
         updateUsername();
         updateEmail();
@@ -112,60 +107,17 @@ const updatePass = (data) => {
         let updatedPass = $('#pass-update').val();
         let enterCurrentPassword = $('#enter-currentPassword').val();
         if (oldPassword === enterCurrentPassword && (updatedPass.length > 3)) {
-            const userUpdatedInfo = {
-                password: `${updatedPass}`
-            };
             alert('Password Match and Updated')
-            fetchAction("PATCH", userUpdatedInfo,
+            fetchAction("PATCH", {
+                    password: `${updatedPass}`
+                },
                 `http://localhost:8080/api/users/${userId}/updatePassword?oldPassword=${enterCurrentPassword}&newPassword=${updatedPass}`,
-                page)
+                "/myInformation")
         } else {
             alert('Current Password did not match our records or new password is less than 3 letters')
         }
     })
 }
-
-//////////////////         might not need this code.... waiting to see how the project is going to developed
-// Edit actions
-//
-// const getCurrentUserValuesOnClick = () => {
-//     $('#update-btn').click(function () {
-//         let currentUsername = $('#current-username').html();
-//         let currentEmail = $('#current-email').html();
-//         let currentPass = $('#current-pass').html();
-//         let userId = $('#current-id').attr('data-id')
-//         let updatedUsername = $('#username-update').val();
-//         let updatedPass = $('#pass-update').val();
-//         let updatedEmail = $('#email-update').val();
-//         // do put request
-//         if (updatedUsername) {
-//             currentUsername = updatedUsername;
-//             if (updatedEmail) {
-//                 currentEmail = updatedEmail;
-//             }
-//             if (updatedPass) {
-//                 currentPass = updatedPass;
-//             }
-//             prepareToSentPutRequest(userId, currentUsername, currentEmail, currentPass)
-//         }
-//     })
-// }
-//
-// // do fetch "PUT" when update button gets click
-// const prepareToSentPutRequest = (id, username, email, pass) => {
-//     const userUpdatedInfo = {
-//         id: `${id}`,
-//         username: `${username}`,
-//         email: `${email}`,
-//         password: `${pass}`
-//     };
-//     let action = 'PUT';
-//     let url = `http://localhost:8080/api/users/${id}`
-//     fetchAction(action, userUpdatedInfo, url, page)
-// }
-
-/////////////////////////////////////////////////////////////
-
 
 // Look for user based on username
 // can be  refactor to used fetchAction

@@ -57,7 +57,8 @@ function postEventListener() {
             // check if data-id is undefined
             if (updatingPost === undefined) {
                 //if its undefined, do a POST request
-                fetchAction("POST", {title: `${title}`, content: `${content}`}, `http://localhost:8080/api/posts`, "/posts")
+                fetchAction("POST", {title: `${title}`, content: `${content}`},
+                    `http://localhost:8080/api/posts`, "/posts");
             }
             // else do a PUT request
             else {
@@ -66,7 +67,7 @@ function postEventListener() {
                     title: `${title}`,
                     content: `${content}`
 
-                }, `http://localhost:8080/api/posts/${updatingPost}`, "/posts")
+                }, `http://localhost:8080/api/posts/${updatingPost}`, "/posts");
             }
         }
     )
@@ -97,21 +98,21 @@ function deleteEventListener() {
 
 
 // Handles all fetch actions: POST, PUT, DELETE, depending in user choice
-export const fetchAction = (action, postObject, url, page) => {
+export const fetchAction = (fetchRequest, objectToFetch, url, createPage) => {
     const options = {
-        method: action,
+        method: fetchRequest,
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(postObject),
+        body: JSON.stringify(objectToFetch),
     };
-    console.log(postObject)
+    console.log(objectToFetch)
     fetch(`${url}`, options)
         .then(res => {
             console.log(res.status);
-            createView(`${page}`)
+            createView(`${createPage}`)
         }).catch(error => {
         console.log(error);
-        createView(`${page}`);
+        createView(`${createPage}`);
     });
 }
