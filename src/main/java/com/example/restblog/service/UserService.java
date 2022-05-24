@@ -43,4 +43,17 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
+    public void updatePost(Long postId, Post post) {
+        Post postToUpdated = postsRepository.findById(postId).orElseThrow();
+
+        if (post.getContent() != null && !post.getContent().isEmpty()) {
+            postToUpdated.setContent(post.getContent());
+        }
+        if (post.getTitle() != null && !post.getTitle().isEmpty()) {
+            postToUpdated.setTitle(post.getTitle());
+        }
+        postsRepository.save(postToUpdated);
+    }
 }

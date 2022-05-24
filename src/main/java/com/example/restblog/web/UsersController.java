@@ -27,10 +27,7 @@ public class UsersController {
 
     @GetMapping("{id}")
     public User getById(@PathVariable Long id) {
-        return getAll().stream().filter((user) -> {
-                    return user.getId() == id;
-                }).findFirst()
-                .orElse(null);
+        return userService.getUserById(id);
 
     }
 
