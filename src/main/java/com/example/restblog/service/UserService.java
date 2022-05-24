@@ -1,5 +1,6 @@
 package com.example.restblog.service;
 
+import com.example.restblog.data.Post;
 import com.example.restblog.data.PostsRepository;
 import com.example.restblog.data.User;
 import com.example.restblog.data.UserRepository;
@@ -21,6 +22,10 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public List<Post> getAllPosts() {
+        return postsRepository.findAll();
     }
 
 }
