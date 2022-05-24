@@ -56,4 +56,8 @@ public class UserService {
         }
         postsRepository.save(postToUpdated);
     }
+
+    public void deletePostById(Long id){
+        postsRepository.deleteById(id);
+    }
 }

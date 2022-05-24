@@ -50,7 +50,7 @@ public class UsersController {
 //
 //    }
 
-    @PostMapping("{username")
+    @PostMapping("{username}")
     public void addUserPost(@PathVariable String username, @RequestBody Post newPost) {
         User user = userService.getUserByUsername(username);
         user.getPosts().add(newPost);
