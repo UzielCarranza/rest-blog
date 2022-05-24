@@ -58,6 +58,7 @@ public class UserService {
     }
 
     public void deletePostById(Long id){
+        System.out.println(id);
         postsRepository.deleteById(id);
     }
 }
