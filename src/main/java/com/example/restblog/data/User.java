@@ -23,7 +23,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     Role role = Role.USER;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")
     private List<Post> posts;
 
