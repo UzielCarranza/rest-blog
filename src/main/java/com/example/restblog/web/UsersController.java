@@ -83,7 +83,7 @@ public class UsersController {
             @PathVariable Long id, @RequestParam(required = false) String oldPassword,
             @Valid @Size(min = 3) @RequestParam String newPassword
     ) {
-        User userToUpdate = getById(id);
+        User userToUpdate = userService.getUserById(id);
         userToUpdate.setPassword(newPassword);
     }
 }
