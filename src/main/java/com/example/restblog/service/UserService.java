@@ -28,4 +28,19 @@ public class UserService {
         return postsRepository.findAll();
     }
 
+    public void addPost(Post newPost, String username) {
+        User user = getUserByUsername(username);
+
+        user.getPosts().add(newPost);
+        newPost.setUser(user);
+        postsRepository.save(newPost);
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
