@@ -124,10 +124,11 @@ const updatePass = (data) => {
 const fetchForUserName = () => {
     $('#search-username').click(function () {
         let usernameToBeFound = $('#username').val();
+        console.log(usernameToBeFound);
         const options = {
             method: 'GET',
         };
-        fetch(`http://localhost:8080/api/users/username/${usernameToBeFound}`, options)
+        fetch(`http://localhost:8080/api/users/username?username=${usernameToBeFound}`, options)
             .then(res =>
                 res.json()
             )
