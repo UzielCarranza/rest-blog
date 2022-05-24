@@ -1,5 +1,6 @@
 package com.example.restblog.web;
 
+import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -33,25 +34,38 @@ public class UsersController {
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
-
-        System.out.println(newUser);
-
+        userService.getAllUsers().add(newUser);
     }
 
 
-    @PutMapping("{id}")
-    private void updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
-        List<User> userListUpdated = getAll();
-        User userToUpdate = getAll().stream().filter((user) -> {
-                    return user.getId() == id;
-                }).findFirst()
-                .orElse(null);
-        userListUpdated.set((int) userToUpdate.getId(), updatedUser);
-        System.out.println(userListUpdated);
+//    @PutMapping("{id}")
+//    private void updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
+//        List<User> userListUpdated = getAll();
+//        User userToUpdate = getAll().stream().filter((user) -> {
+//                    return user.getId() == id;
+//                }).findFirst()
+//                .orElse(null);
+//        userListUpdated.set((int) userToUpdate.getId(), updatedUser);
+//        System.out.println(userListUpdated);
+//
+//    }
 
+    @PostMapping("{username")
+    public void addUserPost(@PathVariable String username, @RequestBody Post newPost) {
+        User user = userService.getUserByUsername(username);
+        user.getPosts().add(newPost);
     }
 
+    @GetMapping("username")
+    public User getByUsername(@RequestParam String username) {
+        return userService.getUserByUsername(username);
+    }
 
+    @GetMapping("email")
+    public void getByEmail(@RequestParam("email") String email) {
+        System.out.println("working on this feature");
+
+    }
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
 
@@ -64,51 +78,12 @@ public class UsersController {
         System.out.println(UserListDeleted);
     }
 
-
-    //    needs to return List<User>... for now is just printing the username for testing purposes
-    @GetMapping("/username/{username}")
-    public User getByUsername(@PathVariable("username") String username) {
-        List<User> userByUsername = getAll();
-
-        User getByUsername = getAll().stream().filter((user) -> {
-                    return user.getUsername().contains(username);
-                }).findFirst()
-                .orElse(null);
-        int userId = (int) getByUsername.getId();
-        return userByUsername.get(userId);
-//        return getByUsername;
-    }
-
-
-    @GetMapping("/email")
-    public void getByEmail(@RequestParam("email") String email) {
-        List<User> userByEmail = getAll();
-
-        User getByEmail = getAll().stream().filter((user) -> {
-                    return user.getEmail().contains(email);
-                }).findFirst()
-                .orElse(null);
-        System.out.println(getByEmail);
-//        return getByUsername;
-
-    }
-
-    @PatchMapping("{id}/updatePassword")
+    @PutMapping("{id}/updatePassword")
     private void updatePassword(
             @PathVariable Long id, @RequestParam(required = false) String oldPassword,
             @Valid @Size(min = 3) @RequestParam String newPassword
     ) {
-        List<User> userUpdate = getAll();
-        User updatePassword = getAll().stream().filter((user) -> {
-                    return user.getId() == id;
-                }).findFirst()
-                .orElse(null);
-        if (updatePassword.getPassword().equals(oldPassword) && (newPassword.length() > 3)) {
-            updatePassword.setPassword(newPassword);
-            System.out.println(updatePassword);
-            System.out.println("password updated");
-        } else {
-            System.out.println("not the same");
-        }
+        User userToUpdate = getById(id);
+        userToUpdate.setPassword(newPassword);
     }
 }
