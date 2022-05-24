@@ -2,12 +2,14 @@ package com.example.restblog.data;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "posts")
+@DynamicUpdate
 public class Post {
 
     @Id
