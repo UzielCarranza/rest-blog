@@ -11,13 +11,13 @@ USE blog_db;
 
 CREATE TABLE users
 (
-    id       BIGINT       NOT NULL AUTO_INCREMENT,
-    username VARCHAR(60)  NOT NULL,
-    password VARCHAR(60)  NOT NULL,
-    email    VARCHAR(200) NOT NULL,
-    role     VARCHAR(32)  NOT NULL,
+    id         BIGINT       NOT NULL AUTO_INCREMENT,
+    username   VARCHAR(60)  NOT NULL,
+    password   VARCHAR(60)  NOT NULL,
+    email      VARCHAR(200) NOT NULL,
+    role       VARCHAR(32)  NOT NULL,
+    created_at DATETIME     NOT NULL,
     PRIMARY KEY (id)
-
 );
 
 CREATE TABLE posts
