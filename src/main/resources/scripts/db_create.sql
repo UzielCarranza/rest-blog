@@ -30,21 +30,21 @@ CREATE TABLE posts
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE tags
+CREATE TABLE category
 (
     id   INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(100),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE post_tags
+CREATE TABLE post_category
 (
     id      BIGINT NOT NULL AUTO_INCREMENT,
     post_id BIGINT NOT NULL,
     tag_id  INT    NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (post_id) REFERENCES posts (id),
-    FOREIGN KEY (tag_id) REFERENCES tags (id)
+    FOREIGN KEY (tag_id) REFERENCES category (id)
 );
 
 

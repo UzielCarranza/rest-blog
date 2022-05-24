@@ -69,13 +69,6 @@ public class UsersController {
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
 
-        List<User> UserListDeleted = getAll();
-        User UserToDelete = getAll().stream().filter((user) -> {
-                    return user.getId() == id;
-                }).findFirst()
-                .orElse(null);
-        UserListDeleted.remove((int) UserToDelete.getId());
-        System.out.println(UserListDeleted);
     }
 
     @PutMapping("{id}/updatePassword")
