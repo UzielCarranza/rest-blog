@@ -4,13 +4,13 @@ VALUES ('test_user', 'test123', 'test@test.com', 'USER', NOW());
 INSERT INTO posts (user_id, title, content)
 VALUES (1, 'Babys First Post', 'Do not be alarmed. This is only a test.');
 
-INSERT INTO category (name)
+INSERT INTO categories (name)
 VALUES ('music'),
     ('FOOD')
     ,
     ('PROGRAMMING');
 
-INSERT INTO post_category (post_id, tag_id)
+INSERT INTO post_category (post_id, category_id)
 VALUES (1, 1);
 
 SELECT *
