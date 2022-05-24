@@ -66,4 +66,8 @@ public class UserService {
         System.out.println(id);
         postsRepository.deleteById(id);
     }
+
+    public List<Post> getPostsByTitleKeyword(String keyword) {
+        return postsRepository.searchByTiTleLike(keyword);
+    }
 }
