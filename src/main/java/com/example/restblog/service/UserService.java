@@ -1,11 +1,9 @@
 package com.example.restblog.service;
 
-import com.example.restblog.data.Post;
-import com.example.restblog.data.PostsRepository;
-import com.example.restblog.data.User;
-import com.example.restblog.data.UserRepository;
+import com.example.restblog.data.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,10 +11,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PostsRepository postsRepository;
+    private final CategoryRepository categoryRepository;
 
-    public UserService(UserRepository userRepository, PostsRepository postsRepository) {
+    public UserService(UserRepository userRepository, PostsRepository postsRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
         this.postsRepository = postsRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -30,9 +30,14 @@ public class UserService {
 
     public void addPost(Post newPost, String username) {
         User user = getUserByUsername(username);
-
         user.getPosts().add(newPost);
         newPost.setUser(user);
+        List<Category> categoriesToAdd = new ArrayList<>();
+        for (Category category : newPost.getCategories()) {
+            categoriesToAdd.add(categoryRepository.findCategoryByName(category.getName()));
+        }
+        newPost.setCategories(categoriesToAdd);
+
         postsRepository.save(newPost);
     }
 
@@ -57,7 +62,7 @@ public class UserService {
         postsRepository.save(postToUpdated);
     }
 
-    public void deletePostById(Long id){
+    public void deletePostById(Long id) {
         System.out.println(id);
         postsRepository.deleteById(id);
     }
