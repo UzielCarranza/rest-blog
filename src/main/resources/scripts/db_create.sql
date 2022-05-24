@@ -46,3 +46,5 @@ CREATE TABLE post_tags
     FOREIGN KEY (post_id) REFERENCES posts (id),
     FOREIGN KEY (tag_id) REFERENCES tags (id)
 );
+
+

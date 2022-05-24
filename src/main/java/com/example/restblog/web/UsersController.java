@@ -1,10 +1,11 @@
 package com.example.restblog.web;
+
 import com.example.restblog.data.User;
+import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,25 +13,16 @@ import java.util.List;
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
 
+    private final UserService userService;
+
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
+
     public List<User> getAll() {
-        List<User> users = new ArrayList<>();
-        User user = new User();
-        user.setId(0);
-        user.setEmail("email@email");
-        user.setPassword("daeadae");
-        user.setUsername("one");
-
-        User user2 = new User();
-        user2.setId(1);
-        user2.setEmail("email@email");
-        user2.setPassword("eadae");
-        user2.setUsername("dae");
-        users.add(user);
-        users.add(user2);
-
-        return users;
+        return userService.getAllUsers();
     }
 
     @GetMapping("{id}")
