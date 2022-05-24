@@ -68,7 +68,6 @@ public class UsersController {
     }
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
-
     }
 
     @PutMapping("{id}/updatePassword")

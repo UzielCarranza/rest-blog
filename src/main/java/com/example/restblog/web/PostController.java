@@ -1,6 +1,7 @@
 package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
+import com.example.restblog.data.PostsRepository;
 import com.example.restblog.data.User;
 import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,7 @@ public class PostController {
 
 
     @PostMapping("{username}")
-    public void createByUsername(@PathVariable String username, @RequestBody Post newPost){
-        // Nice and clean, huh?
+    public void createByUsername(@PathVariable String username, @RequestBody Post newPost) {
         userService.addPost(newPost, username);
     }
 
