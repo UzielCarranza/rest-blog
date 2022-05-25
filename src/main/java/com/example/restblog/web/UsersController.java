@@ -62,8 +62,8 @@ public class UsersController {
     }
 
     @GetMapping("email")
-    public void getByEmail(@RequestParam("email") String email) {
-        System.out.println("working on this feature");
+    public User getByEmail(@RequestParam("email") String email) {
+        return userService.getUserByEmail(email);
 
     }
     @DeleteMapping("{id}")
