@@ -1,5 +1,6 @@
 package com.example.restblog.web;
 
+import com.example.restblog.DTO.CreatePostDto;
 import com.example.restblog.data.Post;
 import com.example.restblog.service.EmailService;
 import com.example.restblog.service.UserService;
@@ -41,15 +42,14 @@ public class PostController {
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
-
-        System.out.println(newPost);
-
     }
 
 
     @PostMapping("{username}")
-    public void createByUsername(@PathVariable String username, @RequestBody Post newPost) {
-        userService.addPost(newPost, username);
+    public void createByUsername(@PathVariable String username, @RequestBody CreatePostDto dto) {
+        Post newPost = new Post();
+        userService.addPost(dto, newPost, username);
+        emailService.prepareAndSend(newPost, "New Post","Ypu have created a new post");
     }
 
 
@@ -64,6 +64,10 @@ public class PostController {
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Long id) {
         userService.deletePostById(id);
+    }
+
+    public List<Post> searchPosts(@RequestParam String keyword){
+        return userService.getPostsByTitleKeyword(keyword);
     }
 
 }

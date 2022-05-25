@@ -1,5 +1,6 @@
 package com.example.restblog.service;
 
+import com.example.restblog.DTO.CreatePostDto;
 import com.example.restblog.data.*;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,12 @@ public class UserService {
         return postsRepository.findAll();
     }
 
-    public void addPost(Post newPost, String username) {
+    public void addPost(CreatePostDto dto, Post newPost, String username) {
         User user = getUserByUsername(username);
         user.getPosts().add(newPost);
+        newPost.setTitle(dto.getTitle());
+        newPost.setContent(dto.getContent());
+
         newPost.setUser(user);
         List<Category> categoriesToAdd = new ArrayList<>();
         for (Category category : newPost.getCategories()) {
@@ -48,6 +52,7 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
