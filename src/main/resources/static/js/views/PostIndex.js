@@ -3,24 +3,24 @@ import createView from "../createView.js";
 export default function PostIndex(props) {
     // language=HTML
     return `
-        <header>
-            <h1>Posts Page</h1>
+        <header class="container text-center">
+            <h1>Find all your topics here</h1>
         </header>
         <main>
-            <div id="posts-container" class="container">
+            <div id="posts-container" class="container mt-4 mb-4">
                 ${props.posts.map(post => `
              <div class="containe text-center rounded border border-primary m-4">
             <h3 class="content-title">${post.title}</h3>
-            <h3 class="content-post">${post.content}</h3>
-            <p>Wrote by: ${post.user.username}</p>
+            <h6 class="content-post">${post.content}</h6>
+            <p class="mt-4">Wrote by: ${post.user.username}</p>
                     <button class="btn edit-post  btn-primary mt-4 mb-1" data-id="${post.id}"> <i class="fa-solid fa-pencil"></i>  Edit Post</button>
                     <button class="btn delete-post  btn-primary mt-4 mb-1" data-id="${post.id}" >Delete Post  <i class="fa-solid fa-trash-can"></i></button> 
                     </div>
                 `).join('')}
 
             </div>
-            <div class="container">
-                <form id="create-newPost" class="text-center form-control">
+            <div class="container mt-4 mb-4">
+                <form id="create-newPost" class="text-center form-control mt-4">
                     <span class="post-update"></span>
                     <label for="post-title">Title:</label>
                     <input type="text" id="post-title" name="post-title" class="form-control" placeholder="Enter Title">
