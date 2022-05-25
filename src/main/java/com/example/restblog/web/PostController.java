@@ -1,12 +1,10 @@
 package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
-import com.example.restblog.data.PostsRepository;
-import com.example.restblog.data.User;
+import com.example.restblog.service.EmailService;
 import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -16,9 +14,15 @@ public class PostController {
 
     private final UserService userService;
 
-    public PostController(UserService userService) {
+//    added email service
+
+    private final EmailService emailService;
+
+    public PostController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
+//    email service
 
     @GetMapping()
     public List<Post> getAll() {
