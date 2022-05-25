@@ -35,7 +35,7 @@ public class Post {
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
-    @JsonIgnoreProperties("categories")
+    @JsonIgnoreProperties("posts")
     private Collection<Category> categories;
 
     public Post(long id, String title, String content, User user) {
