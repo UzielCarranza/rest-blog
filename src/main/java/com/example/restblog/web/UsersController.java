@@ -20,6 +20,24 @@ public class UsersController {
         this.userService = userService;
     }
 
+
+    //    CREATE METHODS
+    @PostMapping
+    private void createUser(@RequestBody User newUser) {
+        userService.createUser(newUser);
+    }
+
+    @PostMapping("{username}")
+    public void addUserPost(@PathVariable String username, @RequestBody Post newPost) {
+        User user = userService.getUserByUsername(username);
+        user.getPosts().add(newPost);
+    }
+
+//
+
+
+//    GET METHODS
+
     @GetMapping()
     public List<User> getAll() {
         return userService.getAllUsers();
@@ -29,30 +47,6 @@ public class UsersController {
     public User getById(@PathVariable Long id) {
         return userService.getUserById(id);
 
-    }
-
-    @PostMapping
-    private void createUser(@RequestBody User newUser) {
-        userService.createUser(newUser);
-    }
-
-
-//    @PutMapping("{id}")
-//    private void updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
-//        List<User> userListUpdated = getAll();
-//        User userToUpdate = getAll().stream().filter((user) -> {
-//                    return user.getId() == id;
-//                }).findFirst()
-//                .orElse(null);
-//        userListUpdated.set((int) userToUpdate.getId(), updatedUser);
-//        System.out.println(userListUpdated);
-//
-//    }
-
-    @PostMapping("{username}")
-    public void addUserPost(@PathVariable String username, @RequestBody Post newPost) {
-        User user = userService.getUserByUsername(username);
-        user.getPosts().add(newPost);
     }
 
     @GetMapping("username")
@@ -66,10 +60,17 @@ public class UsersController {
 
     }
 
+//
+
+
+    //    DELETE METHODS
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
     }
+//
 
+
+    //    UPDATE METHODS
     @PutMapping("{id}/updatePassword")
     private void updatePassword(
             @PathVariable Long id, @RequestParam(required = false) String oldPassword,
@@ -84,5 +85,7 @@ public class UsersController {
     public void updateEmail(@PathVariable long userId, @RequestParam String newEmail) {
         userService.updateEmail(userId, newEmail);
     }
+
+//
 
 }
