@@ -50,4 +50,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateName(Long userId, String newName) {
+        User userUpdatedName = getUserById(userId);
+        userUpdatedName.setUsername(newName);
+        userRepository.save(userUpdatedName);
+    }
+
+//
+
 }

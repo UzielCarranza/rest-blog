@@ -87,7 +87,9 @@ const updateUsername = () => {
     $('#update-username').click(function () {
         let userId = $('#current-id').attr('data-id');
         let updatedUsername = $('#username-update').val();
-        console.log("Updating username coming soon")
+        fetchAction("PUT", {},
+            `http://localhost:8080/api/users/${userId}/updateName?newName=${updatedUsername}`,
+            "/myInformation")
     })
 }
 

@@ -86,6 +86,10 @@ public class UsersController {
         userService.updateEmail(userId, newEmail);
     }
 
+    @PutMapping("{userId}/updateName")
+    public void updateName(@PathVariable Long userId, @RequestParam String newName) {
+        userService.updateName(userId, newName);
+    }
 //
 
 }
