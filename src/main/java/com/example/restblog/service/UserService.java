@@ -1,10 +1,6 @@
 package com.example.restblog.service;
-
-import com.example.restblog.DTO.CreatePostDto;
 import com.example.restblog.data.*;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
