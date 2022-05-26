@@ -65,7 +65,8 @@ public class UsersController {
 
     //    DELETE METHODS
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
     }
 //
 
