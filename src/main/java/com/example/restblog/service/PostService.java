@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -30,6 +31,10 @@ public class PostService {
         return postsRepository.findAll();
     }
 
+    public Post getPostById(Long postId) {
+        return postsRepository.findById(postId).orElseThrow();
+
+    }
 
     public List<Post> getPostsByTitleKeyword(String keyword) {
         return postsRepository.searchByTiTleLike(keyword);

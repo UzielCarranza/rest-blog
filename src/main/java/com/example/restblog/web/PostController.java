@@ -24,7 +24,6 @@ public class PostController {
     }
 
 
-
     //    GET METHODS
     @GetMapping()
     public List<Post> getAll() {
@@ -33,11 +32,7 @@ public class PostController {
 
     @GetMapping("{id}")
     public Post getById(@PathVariable Long id) {
-        return postService.getAllPosts().stream().filter((post) -> {
-                    return post.getId() == id;
-                }).findFirst()
-                .orElse(null);
-
+        return postService.getPostById(id);
     }
 
     public List<Post> searchPosts(@RequestParam String keyword) {
@@ -61,8 +56,6 @@ public class PostController {
         emailService.prepareAndSend(newPost, "New Post", "Ypu have created a new post");
     }
 //
-
-
 
 
 //    UPDATE METHODS
