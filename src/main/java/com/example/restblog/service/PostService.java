@@ -64,14 +64,14 @@ public class PostService {
 
 //    UPDATE METHODS
 
-    public void updatePost(Long postId, Post post) {
+    public void updatePost(CreatePostDto dto, Long postId, Post post) {
         Post postToUpdated = postsRepository.findById(postId).orElseThrow();
 
-        if (post.getContent() != null && !post.getContent().isEmpty()) {
-            postToUpdated.setContent(post.getContent());
+        if (dto.getContent() != null && !dto.getContent().isEmpty()) {
+            postToUpdated.setContent(dto.getContent());
         }
-        if (post.getTitle() != null && !post.getTitle().isEmpty()) {
-            postToUpdated.setTitle(post.getTitle());
+        if (dto.getTitle() != null && !dto.getTitle().isEmpty()) {
+            postToUpdated.setTitle(dto.getTitle());
         }
         postsRepository.save(postToUpdated);
     }

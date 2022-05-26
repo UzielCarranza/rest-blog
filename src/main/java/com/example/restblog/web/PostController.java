@@ -43,12 +43,6 @@ public class PostController {
 
 //    CREATE METHODS
 
-//    @PostMapping
-//    private void createPost(@RequestBody Post newPost, @RequestParam String username ) {
-//        postService.addPost(newPost, username);
-//    }
-
-
     @PostMapping("{username}")
     public void createByUsername(@PathVariable String username, @RequestBody CreatePostDto dto) {
         Post newPost = new Post();
@@ -65,9 +59,9 @@ public class PostController {
 
 
     @PutMapping("{id}")
-    private void updatePost(@RequestBody Post updatedPost, @PathVariable Long id) {
-
-        postService.updatePost(id, updatedPost);
+    private void updatePost(@RequestBody CreatePostDto dto, @PathVariable Long id) {
+        Post updatedPost = new Post();
+        postService.updatePost(dto, id, updatedPost);
 
     }
 //
