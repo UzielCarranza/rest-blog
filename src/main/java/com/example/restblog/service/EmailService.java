@@ -14,8 +14,8 @@ public class EmailService {
     @Autowired
     public JavaMailSender emailSender;
 
-//    @Value("${spring.mail.from}")
     @Value("${spring.mail.from}")
+//    @Value("${spring.mail.from}")
     private String from;
 
     public void prepareAndSend(Post post, String subject, String body) {
