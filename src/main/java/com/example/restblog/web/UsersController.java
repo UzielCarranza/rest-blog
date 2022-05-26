@@ -33,7 +33,7 @@ public class UsersController {
 
     @PostMapping
     private void createUser(@RequestBody User newUser) {
-        userService.getAllUsers().add(newUser);
+        userService.createUser(newUser);
     }
 
 

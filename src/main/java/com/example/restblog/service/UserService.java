@@ -22,11 +22,16 @@ public class UserService {
 
 
     public List<User> getAllUsers() {
+
         return userRepository.findAll();
     }
 
     public List<Post> getAllPosts() {
+
         return postsRepository.findAll();
+    }
+    public void createUser(User newUser){
+        userRepository.save(newUser);
     }
 
     public void addPost(CreatePostDto dto, Post newPost, String username) {

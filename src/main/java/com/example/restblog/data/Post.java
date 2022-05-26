@@ -21,7 +21,7 @@ public class Post {
 
 
     @ManyToOne
-    @JsonIgnoreProperties({"posts", "password"})
+    @JsonIgnoreProperties("posts")
     private User user;
 
     @ManyToMany(
