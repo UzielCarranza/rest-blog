@@ -42,6 +42,7 @@ public class PostController {
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
+        System.out.println(newPost);
     }
 
 

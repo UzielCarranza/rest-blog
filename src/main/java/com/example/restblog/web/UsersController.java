@@ -21,7 +21,6 @@ public class UsersController {
     }
 
     @GetMapping()
-
     public List<User> getAll() {
         return userService.getAllUsers();
     }
@@ -75,7 +74,7 @@ public class UsersController {
             @PathVariable Long id, @RequestParam(required = false) String oldPassword,
             @Valid @Size(min = 3) @RequestParam String newPassword
     ) {
-        User userToUpdate = userService.getUserById(id);
+        User userToUpdate = getById(id);
         userToUpdate.setPassword(newPassword);
     }
 }

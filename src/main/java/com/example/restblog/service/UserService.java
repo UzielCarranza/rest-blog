@@ -37,8 +37,8 @@ public class UserService {
 
         newPost.setUser(user);
         List<Category> categoriesToAdd = new ArrayList<>();
-        for (Category category : newPost.getCategories()) {
-            categoriesToAdd.add(categoryRepository.findCategoryByName(category.getName()));
+        for (String category : dto.getCategories()) {
+            categoriesToAdd.add(categoryRepository.findCategoryByName(category));
         }
         newPost.setCategories(categoriesToAdd);
 
@@ -71,7 +71,6 @@ public class UserService {
     }
 
     public void deletePostById(Long id) {
-        System.out.println(id);
         postsRepository.deleteById(id);
     }
 
