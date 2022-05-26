@@ -22,8 +22,10 @@ public class PostController {
         this.emailService = emailService;
         this.postService = postService;
     }
-//    email service
 
+
+
+    //    GET METHODS
     @GetMapping()
     public List<Post> getAll() {
         return postService.getAllPosts();
@@ -38,6 +40,13 @@ public class PostController {
 
     }
 
+    public List<Post> searchPosts(@RequestParam String keyword) {
+        return postService.getPostsByTitleKeyword(keyword);
+    }
+
+//
+
+//    CREATE METHODS
 
     @PostMapping
     private void createPost(@RequestBody Post newPost) {
@@ -49,8 +58,14 @@ public class PostController {
     public void createByUsername(@PathVariable String username, @RequestBody CreatePostDto dto) {
         Post newPost = new Post();
         postService.addPost(dto, newPost, username);
-        emailService.prepareAndSend(newPost, "New Post","Ypu have created a new post");
+        emailService.prepareAndSend(newPost, "New Post", "Ypu have created a new post");
     }
+//
+
+
+
+
+//    UPDATE METHODS
 
 
     @PutMapping("{id}")
@@ -59,15 +74,16 @@ public class PostController {
         postService.updatePost(id, updatedPost);
 
     }
+//
 
 
+    //    DELETE METHODS
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Long id) {
         postService.deletePostById(id);
     }
 
-    public List<Post> searchPosts(@RequestParam String keyword){
-        return postService.getPostsByTitleKeyword(keyword);
-    }
+
+//
 
 }

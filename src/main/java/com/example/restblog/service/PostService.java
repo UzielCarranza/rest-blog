@@ -23,11 +23,22 @@ public class PostService {
         this.userService = userService;
     }
 
+
+    //    GET METHODS
     public List<Post> getAllPosts() {
 
         return postsRepository.findAll();
     }
 
+
+    public List<Post> getPostsByTitleKeyword(String keyword) {
+        return postsRepository.searchByTiTleLike(keyword);
+    }
+
+    //
+
+
+    //    CREATE METHODS
     public void addPost(CreatePostDto dto, Post newPost, String username) {
         User user = userService.getUserByUsername(username);
         user.getPosts().add(newPost);
@@ -43,6 +54,10 @@ public class PostService {
 
         postsRepository.save(newPost);
     }
+//
+
+
+//    UPDATE METHODS
 
     public void updatePost(Long postId, Post post) {
         Post postToUpdated = postsRepository.findById(postId).orElseThrow();
@@ -55,13 +70,12 @@ public class PostService {
         }
         postsRepository.save(postToUpdated);
     }
+//
 
 
+    //    DELETE METHODS
     public void deletePostById(Long id) {
         postsRepository.deleteById(id);
     }
-
-    public List<Post> getPostsByTitleKeyword(String keyword) {
-        return postsRepository.searchByTiTleLike(keyword);
-    }
+//
 }
