@@ -71,13 +71,12 @@ public class UsersController {
 
 
     //    UPDATE METHODS
-    @PutMapping("{id}/updatePassword")
+    @PutMapping("{userId}/updatePassword")
     private void updatePassword(
-            @PathVariable Long id, @RequestParam(required = false) String oldPassword,
+            @PathVariable Long userId, @RequestParam(required = false) String oldPassword,
             @Valid @Size(min = 3) @RequestParam String newPassword
     ) {
-        User userToUpdate = getById(id);
-        userToUpdate.setPassword(newPassword);
+        userService.updatePassword(userId, newPassword);
     }
 
 

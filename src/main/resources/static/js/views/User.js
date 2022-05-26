@@ -113,10 +113,8 @@ const updatePass = (data) => {
         let enterCurrentPassword = $('#enter-currentPassword').val();
         if (oldPassword === enterCurrentPassword && (updatedPass.length > 3)) {
             alert('Password Match and Updated')
-            fetchAction("PUT", {
-                    password: `${updatedPass}`
-                },
-                `http://localhost:8080/api/users/${userId}/updatePassword?oldPassword=${enterCurrentPassword}&newPassword=${updatedPass}`,
+            fetchAction("PUT", {},
+                `http://localhost:8080/api/users/${userId}/updatePassword?newPassword=${updatedPass}`,
                 "/myInformation")
         } else {
             alert('Current Password did not match our records or new password is less than 3 letters')
