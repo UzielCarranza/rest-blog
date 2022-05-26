@@ -1,6 +1,8 @@
 package com.example.restblog.service;
+
 import com.example.restblog.data.*;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -13,16 +15,20 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    //CREATE METHODS
+    public void createUser(User newUser) {
+        userRepository.save(newUser);
+    }
 
     public List<User> getAllUsers() {
 
         return userRepository.findAll();
     }
 
-    public void createUser(User newUser) {
-        userRepository.save(newUser);
-    }
+    //
 
+
+    // GET METHODS
     public User getUserById(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
@@ -34,6 +40,7 @@ public class UserService {
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+//
 
 
     //    UPDATE METHODS
