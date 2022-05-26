@@ -43,18 +43,21 @@ public class PostController {
 
 //    CREATE METHODS
 
-    @PostMapping
-    private void createPost(@RequestBody Post newPost) {
-        System.out.println(newPost);
-    }
+//    @PostMapping
+//    private void createPost(@RequestBody Post newPost, @RequestParam String username ) {
+//        postService.addPost(newPost, username);
+//    }
 
 
     @PostMapping("{username}")
     public void createByUsername(@PathVariable String username, @RequestBody CreatePostDto dto) {
         Post newPost = new Post();
         postService.addPost(dto, newPost, username);
-        emailService.prepareAndSend(newPost, "New Post", "Ypu have created a new post");
+//        emailService.prepareAndSend(newPost, "New Post", "Ypu have created a new post");
     }
+
+
+
 //
 
 
