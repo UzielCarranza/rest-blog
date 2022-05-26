@@ -93,10 +93,13 @@ const updateUsername = () => {
 
 
 const updateEmail = () => {
-    $('#update-email').click(function () {
+    $('#update-email').click(function (e) {
+        e.preventDefault();
         let userId = $('#current-id').attr('data-id');
         let updatedEmail = $('#email-update').val();
-        console.log("Updating email coming soon")
+        fetchAction("PUT", {},
+            `http://localhost:8080/api/users/${userId}/updateEmail?newEmail=${updatedEmail}`,
+            "/myInformation")
     })
 }
 
@@ -108,7 +111,7 @@ const updatePass = (data) => {
         let enterCurrentPassword = $('#enter-currentPassword').val();
         if (oldPassword === enterCurrentPassword && (updatedPass.length > 3)) {
             alert('Password Match and Updated')
-            fetchAction("PATCH", {
+            fetchAction("PUT", {
                     password: `${updatedPass}`
                 },
                 `http://localhost:8080/api/users/${userId}/updatePassword?oldPassword=${enterCurrentPassword}&newPassword=${updatedPass}`,
