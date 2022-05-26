@@ -39,4 +39,12 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+
+    //    UPDATE METHODS
+    public void updateEmail(Long userId, String newEmail) {
+        User user = getUserById(userId);
+        user.setEmail(newEmail);
+        userRepository.save(user);
+    }
+
 }

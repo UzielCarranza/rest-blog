@@ -65,6 +65,7 @@ public class UsersController {
         return userService.getUserByEmail(email);
 
     }
+
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable int id) {
     }
@@ -77,4 +78,11 @@ public class UsersController {
         User userToUpdate = getById(id);
         userToUpdate.setPassword(newPassword);
     }
+
+
+    @PutMapping("{userId}/updateEmail")
+    public void updateEmail(@PathVariable long userId, @RequestParam String newEmail) {
+        userService.updateEmail(userId, newEmail);
+    }
+
 }
