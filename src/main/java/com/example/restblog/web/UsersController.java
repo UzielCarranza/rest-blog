@@ -3,6 +3,7 @@ package com.example.restblog.web;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import com.example.restblog.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,15 +16,18 @@ import java.util.List;
 public class UsersController {
 
     private final UserService userService;
+    private PasswordEncoder passwordEncoder;
 
-    public UsersController(UserService userService) {
+    public UsersController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     //    CREATE METHODS
-    @PostMapping
+    @PostMapping("create")
     private void createUser(@RequestBody User newUser) {
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userService.createUser(newUser);
     }
 
@@ -52,12 +56,6 @@ public class UsersController {
     @GetMapping("username")
     public User getByUsername(@RequestParam String username) {
         return userService.getUserByUsername(username);
-    }
-
-    @GetMapping("email")
-    public User getByEmail(@RequestParam("email") String email) {
-        return userService.getUserByEmail(email);
-
     }
 
 //
