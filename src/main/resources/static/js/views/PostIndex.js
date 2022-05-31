@@ -43,6 +43,15 @@ export function PostEvent() {
     deleteEventListener();
 }
 
+var userName;
+
+var userPass;
+export function getUser(username, pass){
+    userName = username;
+    userPass = pass;
+
+}
+
 function postEventListener() {
     $("#create-post").click(function () {
 
@@ -55,10 +64,10 @@ function postEventListener() {
             //
 
             // check if data-id is undefined
-            if (updatingPost === undefined) {
+            if (userPass !== undefined) {
                 //if its undefined, do a POST request
-                fetchAction("POST", {title: `${title}`, content: `${content}`},
-                    `http://localhost:8080/api/posts`, "/posts");
+                fetchAction("POST", {title: `${title}`, content: `${content}`, categories: ['FOOD']},
+                    `http://localhost:8080/api/posts/${userName}`, "/posts");
             }
             // else do a PUT request
             else {
