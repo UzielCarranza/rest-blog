@@ -57,7 +57,7 @@ const registerButton = () => {
             email: $("#email").val(),
             password: $("#password").val(),
 
-        }, "http://localhost:8080/api/users", "/")
+        }, "http://localhost:8080/api/users/create", "/")
     });
 }
 
