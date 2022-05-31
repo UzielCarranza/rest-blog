@@ -44,8 +44,8 @@ public class PostService {
 
 
     //    CREATE METHODS
-    public void addPost(CreatePostDto dto, Post newPost, String username) {
-        User user = userService.getUserByUsername(username);
+    public void addPost(CreatePostDto dto, Post newPost, String email) {
+        User user = userService.getUserByEmail(email);
         user.getPosts().add(newPost);
         newPost.setTitle(dto.getTitle());
         newPost.setContent(dto.getContent());
