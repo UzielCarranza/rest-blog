@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    public UserSecurityService(UserRepository repository) {
         this.repository = repository;
     }
 
